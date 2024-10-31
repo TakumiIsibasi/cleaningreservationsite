@@ -1,0 +1,40 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<!-- ログイン前ヘッダー,フッター -->
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>株式会社クリッピー</h1>
+            <nav>
+                <ul>
+                    <!-- 新規登録画面に遷移する -->
+                    <li><a href="{% url 'usersignup' %}">新規登録</a></li>
+                    <!-- ログイン画面に遷移する -->
+                    <li><a href="{% url 'userlogin' %}">ログイン</a></li>
+                    <!-- お問い合わせ画面に遷移する -->
+                    <li><a href="user/contactus.html">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+ 
+    <main>
+        {% block title %}
+        {% endblock %}
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+ 
+    <footer>
+        <p>&copy; 2024 株式会社クリッピー. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!-- ログイン後ヘッダー,フッター -->
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>株式会社クリッピー</h1>
+            <nav>
+                <ul>
+                    <li><a>ユーザー名</a></li>
+                    <!-- ログアウト完了画面に遷移する -->
+                    <li><a href="logout.html">ログアウト</a></li>
+                    <!-- お問い合わせ画面に遷移する -->
+                    <li><a href="user/contactus.html">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+ 
+    <main>
+        {% block title %}
+        {% endblock %}
+
+        {% block content %}
+            <!-- スクロールバーを表示したい部分 -->
+            <div class="scrollable-content">
+                <!-- 表示したいコンテンツをここに配置 -->
+                {% for item in items %}
+                    <p>{{ item }}</p>
+                {% endfor %}
+            </div>
+        {% endblock %}
+    </main>
+ 
+    <footer>
+        <p>&copy; 2024 株式会社クリッピー. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
