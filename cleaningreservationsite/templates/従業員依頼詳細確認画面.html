@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清掃スケジュール</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .notes-row td {
+            padding: 16px;
+            background-color: #f9f9f9;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>清掃スケジュール</h1>
+    
+    <!-- スケジュールデータを表示するテーブル -->
+    <table>
+        <thead>
+            <tr>
+                <th>名前</th>
+                <th>清掃場所</th>
+                <th>清掃日時</th>
+                <th>依頼状態</th>
+            </tr>
+        </thead>
+        <tbody id="scheduleTableBody">
+            <!-- JavaScriptでデータをここに挿入 -->
+        </tbody>
+    </table>
+
+    <script>
+        // APIからデータを取得して表示する関数
+        function loadSchedules() {
+            fetch('/api/schedule')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('scheduleTableBody');
+                    tableBody.innerHTML = '';  // テーブルの内容を初期化
+                    data.forEach(item => {
+                        // 通常のデータ行
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.name}</td>
+                            <td>${item.location}</td>
+                            <td>${item.date_time}</td>
+                            <td>${item.status}</td>
+                        `;
+                        tableBody.appendChild(row);
+
+                        // 備考欄の行
+                        const notesRow = document.createElement('tr');
+                        notesRow.className = 'notes-row';
+                        notesRow.innerHTML = `
+                            <td colspan="4">備考: ${item.notes}</td>
+                        `;
+                        tableBody.appendChild(notesRow);
+                    });
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // ページロード時にスケジュールを読み込む
+        window.onload = loadSchedules;
+    </script>
+</body>
+</html>
+
