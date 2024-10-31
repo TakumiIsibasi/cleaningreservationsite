@@ -1,0 +1,58 @@
+<!-- templates/home.html -->
+{% extends 'basea.html' %}
+
+<!-- 予約画面 -->
+{% block title %}
+    <h1>予約</h1>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div style="text-align: center;">
+    <div>
+        <label for="name">名前</label>
+    </div>
+    <div>
+        <label for="phone">電話番号</label>
+    </div>
+    <div>
+        <label for="email">メールアドレス</label>
+    </div>
+    <div>
+        <label for="address">住所</label>
+        <input type="text" id="address" name="address" required>
+    </div>
+    <div>
+        <label for="cleaning-location">清掃場所</label>
+        <select id="cleaning-location" name="cleaning-location" required>
+            <option value="" disabled selected>清掃場所を選択してください</option>
+            <option value="office">オフィス</option>
+            <option value="home">自宅</option>
+            <option value="warehouse">倉庫</option>
+            <option value="school">学校</option>
+            <option value="shop">店舗</option>
+        </select>
+    </div>
+    <div>
+        <label for="cleaning-date">清掃日時</label>
+        <input type="datetime-local" id="cleaning-date" name="cleaning-date" required>
+    </div>
+    <div>
+        <label for="notes">備考欄</label>
+        <textarea id="notes" name="notes" rows="4" maxlength="1000"></textarea>
+    </div>
+    <div>
+        <!-- 予約完了画面に遷移するボタン -->
+        <form action="{% url 'reservationcompleted' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">予約</button>
+        </form>
+    </div>
+    <!-- ログイン後ホーム画面ページに遷移するボタン -->
+    <form action="{% url 'mainmenu' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">戻る</button>
+    </form>
+</div>
+
+{% endblock %}
