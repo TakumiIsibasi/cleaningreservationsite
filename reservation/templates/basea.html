@@ -14,9 +14,9 @@
                 <ul>
                     <li><a>ユーザー名</a></li>
                     <!-- ログアウト完了画面に遷移する -->
-                    <li><a href="logout.html">ログアウト</a></li>
+                    <li><a href="{% url 'logout' %}">ログアウト</a></li>
                     <!-- お問い合わせ画面に遷移する -->
-                    <li><a href="user/contactus.html">お問い合わせ</a></li>
+                    <li><a href="{% url 'contactus' %}">お問い合わせ</a></li>
                 </ul>
             </nav>
         </div>

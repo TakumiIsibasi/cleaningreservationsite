@@ -25,7 +25,7 @@
 </div>
 <div>
     <!-- ログイン後ホーム画面に遷移するボタン -->
-    <form action="{% url 'mainmenu' %}" method="post">
+    <form action="{% url 'signupcompleted' %}" method="post">
         {% csrf_token %}
         <button type="submit">新規登録</button>
     </form>

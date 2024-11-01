@@ -10,11 +10,13 @@
 {% load static %}
 <div style="text-align: center;">
     <!-- 予約変更画面に遷移するボタン -->
-    <form action="reservationchange.html" method="get">
+    <form action="{% url 'reservationchange' %}" method="post">
+        {% csrf_token %}
         <button type="submit">変更</button>
     </form>
     <!-- 予約キャンセル画面に遷移するボタン -->
-    <form action="reservationcancellationcompleted.html" method="get">
+    <form action="{% url 'reservationcancellationcompleted' %}" method="post">
+        {% csrf_token %}
         <button type="submit">キャンセル</button>
     </form>
     <div>
