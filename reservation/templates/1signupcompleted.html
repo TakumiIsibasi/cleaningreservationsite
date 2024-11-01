@@ -1,0 +1,20 @@
+<!-- templates/home.html -->
+{% extends 'baseb.html' %}
+
+<!-- 新規登録完了画面 -->
+{% block title %}
+    <h1>新規登録完了</h1>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div style="text-align: center;">
+    <p>ご入力したメールアドレス宛に登録完了メールを送信しました。</p>
+    <!-- ログイン後ホーム画面に遷移するボタン -->
+    <form action="{% url 'mainmenu' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">トップページへ</button>
+    </form>
+</div>
+{% endblock %}
+
