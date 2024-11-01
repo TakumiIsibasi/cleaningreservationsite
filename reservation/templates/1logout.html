@@ -1,0 +1,19 @@
+<!-- templates/home.html -->
+{% extends 'baseb.html' %}
+
+<!-- ログアウト画面 -->
+{% block title %}
+    <h1>ログアウト</h1>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div style="text-align: center;">
+    <p>ログアウトが完了しました。メインメニューに戻ります。</p>
+    <!-- ログイン前ホーム画面に遷移するボタン -->
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">トップページへ</button>
+    </form>
+</div>
+{% endblock %}

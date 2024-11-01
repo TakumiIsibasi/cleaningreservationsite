@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>予約変更完了</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="header-container">
+            <h1>株式会社クリッピー</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">ユーザー名</a></li>
+                    <li><a href="#">ログアウト</a></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+ 
+    <!-- メインコンテンツ -->
+    <main>
+        <!-- 利用者予約変更完了画面のタイトル -->
+        <h1>予約変更完了</h1>
+
+        <p>予約を変更しました</p>
+        
+        <!-- 予約詳細ページに遷移するボタン -->
+        <form action="userreservationdetails.html" method="get">
+            <button type="submit">予約詳細ページへ</button>
+        </form>
+    </main>
+ 
+    <!-- フッター -->
+    <footer>
+        <p>&copy; 2024 株式会社クリッピー. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
+<!-- templates/home.html -->
+{% extends 'basea.html' %}
+
+<!-- 予約変更完了画面 -->
+{% block title %}
+    <h1>予約変更完了</h1>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div style="text-align: center;">
+    <p>予約を変更しました</p>
+        
+        <!-- 予約詳細画面に遷移するボタン -->
+        <form action="{% url 'userreservationdetails' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">戻る</button>
+        </form>
+</div>
+
+{% endblock %}
+
