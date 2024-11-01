@@ -48,11 +48,11 @@
             <button type="submit">予約</button>
         </form>
     </div>
-    <!-- ログイン後ホーム画面ページに遷移するボタン -->
-    <form action="{% url 'mainmenu' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">戻る</button>
-    </form>
+        <!-- ログイン後ホーム画面ページに遷移するボタン -->
+        <form action="{% url 'mainmenu' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">戻る</button>
+        </form>
 </div>
 
 {% endblock %}

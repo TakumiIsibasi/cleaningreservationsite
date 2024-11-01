@@ -24,7 +24,7 @@
     <input type="password" id="password" name="password" required>
 </div>
 <div>
-    <!-- ログイン後ホーム画面に遷移するボタン -->
+    <!-- 新規登録完了画面に遷移するボタン -->
     <form action="{% url 'signupcompleted' %}" method="post">
         {% csrf_token %}
         <button type="submit">新規登録</button>

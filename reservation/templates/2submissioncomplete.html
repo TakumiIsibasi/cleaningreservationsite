@@ -1,38 +1,26 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>送信完了</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <!-- ヘッダー -->
-    <header>
-        <div class="header-container">
-            <h1>株式会社クリッピー</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">ユーザー名</a></li>
-                    <li><a href="#">ログアウト</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
- 
-    <!-- メインコンテンツ -->
+<!-- templates/home.html -->
+{% extends 'basea.html' %}
+
+<!-- 送信完了画面 -->
+{% block title %}
+    <h1>送信完了</h1>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div style="text-align: center;">
     <main>
         <!-- 送信完了画面のタイトル -->
         <h1>送信完了</h1>
 
         <p>お問い合わせメールを送信しました</p>
         
-        <!-- トップページに遷移するボタン -->
-        <button type="submit">トップページへ</button>
+        <!-- ログイン後ホーム画面に遷移するボタン -->
+        <form action="{% url 'mainmenu' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">トップページへ</button>
+        </form>
     </main>
- 
-    <!-- フッター -->
-    <footer>
-        <p>&copy; 2024 株式会社クリッピー. All Rights Reserved.</p>
-    </footer>
-</body>
-</html>
+</div>
+
+{% endblock %}
