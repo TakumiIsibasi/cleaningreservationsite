@@ -28,8 +28,5 @@ urlpatterns = [
     path("userreservationlistscreen", views.userreservationlistscreen, name="userreservationlistscreen"),
     # 予約詳細画面
     path("userreservationdetails", views.userreservationdetails, name="userreservationdetails"),
-    # お問い合わせ画面
-    path("contactus", views.contactus, name="contactus"),
-    # お問い合わせ送信完了画面
-    path("submissioncomplete", views.submissioncomplete, name="submissioncomplete"),
+   
 ]

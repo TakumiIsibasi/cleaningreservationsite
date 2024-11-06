@@ -20,5 +20,6 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls), # これは元からある
     path("reservation/", include("reservation.urls")), # これを追加した
+    path("contactus/", include("contactus.urls")), # これを追加した
 ]
 
