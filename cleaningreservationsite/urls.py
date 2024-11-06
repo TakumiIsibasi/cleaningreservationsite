@@ -19,6 +19,8 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls), # これは元からある
-    path("reservation/", include("reservation.urls")), # これを追加した
+    path("", include("accounts.urls")), # accountsアプリのurls
+    path("reservation/", include("reservation.urls")), # reservationのurls
+    path("contactus/", include("contactus.urls")), # contactusのurls
 ]
 

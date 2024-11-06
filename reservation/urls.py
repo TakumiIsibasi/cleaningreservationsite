@@ -2,18 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # ログイン前ホーム画面
-    path("", views.index, name="index"),
-    # ログイン画面
-    path("userlogin", views.userlogin, name="userlogin"),
-    # ログイン後ホーム画面
-    path("mainmenu", views.mainmenu, name="mainmenu"),
-    # ログアウト画面
-    path("logout", views.logout, name="logout"),
-    # 新規登録画面
-    path("usersignup", views.usersignup, name="usersignup"),
-    # 新規登録完了画面
-    path("signupcompleted", views.signupcompleted, name="signupcompleted"),
+    # 利用者ログイン後ホーム画面
+    path("mainmenu", views.mainmenu, name="mainmenu"), 
     # 予約画面
     path("cleaningappointment", views.cleaningappointment, name="cleaningappointment"),
     # 予約完了画面
@@ -27,9 +17,5 @@ urlpatterns = [
     # 予約一覧画面
     path("userreservationlistscreen", views.userreservationlistscreen, name="userreservationlistscreen"),
     # 予約詳細画面
-    path("userreservationdetails", views.userreservationdetails, name="userreservationdetails"),
-    # お問い合わせ画面
-    path("contactus", views.contactus, name="contactus"),
-    # お問い合わせ送信完了画面
-    path("submissioncomplete", views.submissioncomplete, name="submissioncomplete"),
+    path("userreservationdetails", views.userreservationdetails, name="userreservationdetails"),  
 ]
