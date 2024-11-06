@@ -1,5 +1,5 @@
 from django.db import models
-import uuid
+
 # Create your models here.
 class user_reservation(models.Model):
     user_reservation_id = models.UUIDField(primary_key=True, dafeult=uuid.uuid4, editable=False)
