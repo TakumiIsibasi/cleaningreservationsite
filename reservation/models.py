@@ -3,7 +3,7 @@ import uuid
 
 # Create your models here.
 class user_reservation(models.Model):
-    user_reservation_id = models.UUIDField(primary_key=True, dafeult=uuid.uuid4, editable=False)
+    user_reservation_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user_name = models.CharField(max_length=50, verbose_name="名前")
     user_phone = models.IntegerField(max_length=12, verbose_name="電話番号")
     user_email = models.EmailField(max_length=50, verbose_name="メールアドレス")
