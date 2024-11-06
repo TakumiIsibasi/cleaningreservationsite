@@ -27,6 +27,5 @@ urlpatterns = [
     # 予約一覧画面
     path("userreservationlistscreen", views.userreservationlistscreen, name="userreservationlistscreen"),
     # 予約詳細画面
-    path("userreservationdetails", views.userreservationdetails, name="userreservationdetails"),
-   
+    path("userreservationdetails", views.userreservationdetails, name="userreservationdetails"),  
 ]
