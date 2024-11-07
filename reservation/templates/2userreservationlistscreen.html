@@ -12,7 +12,7 @@
     <ul>
         <!-- それぞれの予約詳細画面に遷移する -->
         <li>
-            <a href="{% url 'userreservationdetails' %}">
+            <a href="{% url 'reservation:userreservationdetails' %}">
                 清掃日時: 2024年10月25日 10:00 | 清掃場所: 会議室A
             </a>
         </li>
@@ -28,7 +28,7 @@
         </li>
     </ul>
     <!-- ログイン前ホーム画面に遷移するボタン -->
-    <form action="{% url 'mainmenu' %}" method="post">
+    <form action="{% url 'reservation:mainmenu' %}" method="post">
         {% csrf_token %}
         <button type="submit">戻る</button>
     </form>
