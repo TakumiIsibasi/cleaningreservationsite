@@ -43,13 +43,13 @@
     </div>
     <div>
         <!-- 予約変更完了画面に遷移するボタン -->
-    <form action="{% url 'reservationchangecompleted' %}" method="post">
+    <form action="{% url 'reservation:reservationchangecompleted' %}" method="post">
         {% csrf_token %}
         <button type="submit">予約変更</button>
     </form>
     </div>
         <!-- 予約詳細画面に遷移するボタン -->
-        <form action="{% url 'userreservationdetails' %}" method="post">
+        <form action="{% url 'reservation:userreservationdetails' %}" method="post">
             {% csrf_token %}
             <button type="submit">戻る</button>
         </form>

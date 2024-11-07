@@ -10,12 +10,12 @@
 {% load static %}
 <div style="text-align: center;">
     <!-- 予約変更画面に遷移するボタン -->
-    <form action="{% url 'reservationchange' %}" method="post">
+    <form action="{% url 'reservation:reservationchange' %}" method="post">
         {% csrf_token %}
         <button type="submit">変更</button>
     </form>
     <!-- 予約キャンセル画面に遷移するボタン -->
-    <form action="{% url 'reservationcancellationcompleted' %}" method="post">
+    <form action="{% url 'reservation:reservationcancellationcompleted' %}" method="post">
         {% csrf_token %}
         <button type="submit">キャンセル</button>
     </form>
@@ -41,7 +41,7 @@
         <label for="notes">備考欄</label>
     </div>
     <!-- 予約一覧画面に遷移するボタン -->
-    <form action="{% url 'userreservationlistscreen' %}" method="post">
+    <form action="{% url 'reservation:userreservationlistscreen' %}" method="post">
         {% csrf_token %}
         <button type="submit">戻る</button>
     </form>
