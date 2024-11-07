@@ -11,12 +11,12 @@
 <div style="text-align: center;">
     <img src="{% static 'images/169023_0.jpg' %}" alt="Example Image" class="image-class">
     <!-- 予約画面に遷移するボタン -->
-    <form action="{% url 'reservation:reservation:cleaningappointment' %}" method="post">
+    <form action="{% url 'reservation:cleaningappointment' %}" method="post">
         {% csrf_token %}
         <button type="submit">予約</button>
     </form>
     <!-- 予約一覧画面に遷移するボタン -->
-    <form action="{% url 'reservation:reservation:userreservationlistscreen' %}" method="post">
+    <form action="{% url 'reservation:userreservationlistscreen' %}" method="post">
         {% csrf_token %}
         <button type="submit">予約一覧へ</button>
     </form>
