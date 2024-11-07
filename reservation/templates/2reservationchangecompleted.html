@@ -12,7 +12,7 @@
     <p>予約を変更しました</p>
         
         <!-- 予約詳細画面に遷移するボタン -->
-        <form action="{% url 'userreservationdetails' %}" method="post">
+        <form action="{% url 'reservation:userreservationdetails' %}" method="post">
             {% csrf_token %}
             <button type="submit">戻る</button>
         </form>
