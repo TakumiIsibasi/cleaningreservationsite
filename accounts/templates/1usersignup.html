@@ -1,40 +1,47 @@
-<!-- templates/home.html -->
 {% extends 'baseb.html' %}
 
 <!-- 新規登録画面 -->
 {% block title %}
-    <h1>新規登録</h1>
 {% endblock %}
 
 {% block content %}
-<div>
-    <label for="name">名前</label>
-    <input type="text" id="name" name="name" required>
-</div>
-<div>
-    <label for="phone">電話番号</label>
-    <input type="tel" id="phone" name="phone" required>
-</div>
-<div>
-    <label for="email">メールアドレス</label>
-    <input type="email" id="email" name="email" required>
-</div>
-<div>
-    <label for="password">パスワード</label>
-    <input type="password" id="password" name="password" required>
-</div>
-<div>
-    <!-- 新規登録完了画面に遷移するボタン -->
-    <form action="{% url 'signupcompleted' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">新規登録</button>
-    </form>
-</div>
-<div>
-    <!-- ログイン前ホーム画面に遷移するボタン -->
-    <form action="{% url 'index' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">トップページへ</button>
-    </form>
+<div class="container my-5">
+    <h1 class="mb-4">新規登録</h1>
+
+    <!-- 名前入力フィールド -->
+    <div class="mb-3">
+        <label for="name" class="form-label">名前</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+
+    <!-- 電話番号入力フィールド -->
+    <div class="mb-3">
+        <label for="phone" class="form-label">電話番号</label>
+        <input type="tel" class="form-control" id="phone" name="phone" required pattern="\d{10,11}" title="10桁または11桁の数字を入力してください">
+    </div>
+
+    <!-- メールアドレス入力フィールド -->
+    <div class="mb-3">
+        <label for="email" class="form-label">メールアドレス</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+
+    <!-- パスワード入力フィールド -->
+    <div class="mb-3">
+        <label for="password" class="form-label">パスワード</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+
+    <!-- ボタン配置 -->
+    <div class="d-flex justify-content-between">
+        <!-- 左側のトップページへボタン -->
+        <button type="button" class="btn btn-secondary" onclick="window.location.href='{% url 'index' %}'">トップページへ</button>
+
+        <!-- 右側の新規登録ボタン -->
+        <form action="{% url 'signupcompleted' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">新規登録</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
