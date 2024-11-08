@@ -1,4 +1,3 @@
-<!-- templates/home.html -->
 {% extends 'basea.html' %}
 
 <!-- 予約一覧画面 -->
@@ -7,31 +6,16 @@
 {% endblock %}
 
 {% block content %}
-{% load static %}
-<div style="text-align: center;">
-    <ul>
-        <!-- それぞれの予約詳細画面に遷移する -->
-        <li>
-            <a href="{% url 'reservation:userreservationdetails' %}">
-                清掃日時: 2024年10月25日 10:00 | 清掃場所: 会議室A
-            </a>
-        </li>
-        <li>
-            <a href="details2.html">
-                清掃日時: 2024年10月26日 14:00 | 清掃場所: 廊下B
-            </a>
-        </li>
-        <li>
-            <a href="details3.html">
-                清掃日時: 2024年10月27日 16:00 | 清掃場所: ロビーC
-            </a>
-        </li>
-    </ul>
+<ul>
+    {% for user_reservation in Reservation_list %}
+        <li>清掃場所: {{ user_reservation.user_cleaning_location }}　清掃日時: {{ user_reservation.user_cleaning_date }} </li>
+    {% empty %}
+        <div>清掃予約は一つもありません。</div>    
+    {% endfor %}
+</ul>
     <!-- ログイン前ホーム画面に遷移するボタン -->
-    <form action="{% url 'reservation:mainmenu' %}" method="post">
+    <form action="{% url 'reservation:mainmenu' %}" method="get">
         {% csrf_token %}
         <button type="submit">戻る</button>
     </form>
-</div>
-
 {% endblock %}

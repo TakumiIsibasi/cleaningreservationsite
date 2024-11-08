@@ -12,7 +12,7 @@
     <p>予約が完了しました</p>
         
         <!-- 予約一覧画面に遷移するボタン -->
-        <form action="{% url 'reservation:userreservationlistscreen' %}" method="post">
+        <form action="{% url 'reservation:Reservation_list' %}" method="post">
             {% csrf_token %}
             <button type="submit">予約一覧へ</button>
         </form>
