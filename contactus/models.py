@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 from django.core.validators import MaxLengthValidator
  
-class User_contactus(models. Model):
+class User_contactus(models.Model):
     contactus_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     contactus_name = models.CharField(max_length=15, validators=[MaxLengthValidator(15)],verbose_name="名前")
     contactus_email = models.EmailField(max_length=50, validators=[MaxLengthValidator(50)],verbose_name="メールアドレス")

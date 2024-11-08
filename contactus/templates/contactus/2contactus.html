@@ -1,0 +1,29 @@
+<!-- templates/home.html -->
+{% extends 'basea.html' %}
+
+<!-- お問い合わせ画面 -->
+{% block title %}
+    <h1>お問い合わせ</h1>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<div style="text-align: center;">
+    <main>
+        <!-- お問い合わせ画面のタイトル -->
+        <h1>お問い合わせ</h1>
+        
+        <!-- お問い合わせフォーム -->
+        <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">送信</button>
+        </form>
+        <form action="{% url 'reservation:mainmenu' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">戻る</button>
+        </form>
+    </main>
+</div>
+
+{% endblock %}

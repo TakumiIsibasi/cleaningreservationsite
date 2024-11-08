@@ -16,7 +16,7 @@
         <p>お問い合わせメールを送信しました</p>
         
         <!-- ログイン後ホーム画面に遷移するボタン -->
-        <form action="{% url 'mainmenu' %}" method="post">
+        <form action="{% url 'reservation:mainmenu' %}" method="post">
             {% csrf_token %}
             <button type="submit">トップページへ</button>
         </form>
