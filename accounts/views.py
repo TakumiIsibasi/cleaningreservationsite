@@ -19,7 +19,7 @@ def logout(request):
 class SignUpView(View):
     def get(self, request):
         form = SignUpForm()
-        return render(request, 'testusersignup.html', {"form": form})  
+        return render(request, '1usersignup.html', {"form": form})  
     
     def post(self, request):
         form = SignUpForm(request.POST)
@@ -28,7 +28,7 @@ class SignUpView(View):
             return redirect("signupcompleted")  # 新規登録完了ページへリダイレクト
         else:
             print(form.errors)  # バリデーションエラーメッセージを出力    
-        return render(request, 'testusersignup.html', {"form": form})  
+        return render(request, '1usersignup.html', {"form": form})  
 
 # 新規登録完了画面
 def signupcompleted(request):
