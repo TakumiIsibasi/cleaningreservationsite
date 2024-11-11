@@ -10,7 +10,6 @@ class User(models.Model):
     phone = models.CharField(max_length=12, validators=[MaxLengthValidator(12)], verbose_name="電話番号")
     email = models.EmailField(max_length=50, validators=[MaxLengthValidator(50)], primary_key=True, verbose_name="メールアドレス")
     password = models.CharField(max_length=128, validators=[MaxLengthValidator(128)], verbose_name="パスワード")
-    address = models.CharField(max_length=50, validators=[MaxLengthValidator(50)] ,verbose_name="住所")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="作成日時")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
  
