@@ -1,11 +1,21 @@
-from django.shortcuts import render
-
-# Create your views here.
+# views.py
+from django.shortcuts import render, redirect
+from django.views import View
+from .forms import ContactusForm
 
 # お問い合わせ画面
-def contactus(request):
-    return render(request, '2contactus.html')
+class ContactusCreateView(View):
+    def get(self, request):
+        form = ContactusForm()
+        return render(request, "contactus/2contactus.html", {"form": form})
+
+    def post(self, request):
+        form = ContactusForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("contactus:submissioncomplete")
+        return render(request, "contactus/2contactus.html", {"form": form})
 
 # お問い合わせ送信完了画面
 def submissioncomplete(request):
-    return render(request, '2submissioncomplete.html')
+    return render(request, 'contactus/2submissioncomplete.html')

@@ -1,26 +1,19 @@
-<!-- templates/home.html -->
+<!-- templates/contactus/2submissioncomplete.html -->
 {% extends 'basea.html' %}
 
-<!-- 送信完了画面 -->
 {% block title %}
-    <h1>送信完了</h1>
+    送信完了
 {% endblock %}
 
 {% block content %}
-{% load static %}
 <div style="text-align: center;">
     <main>
-        <!-- 送信完了画面のタイトル -->
         <h1>送信完了</h1>
-
         <p>お問い合わせメールを送信しました</p>
-        
-        <!-- ログイン後ホーム画面に遷移するボタン -->
-        <form action="{% url 'mainmenu' %}" method="post">
+        <form action="{% url 'reservation:mainmenu' %}" method="post">
             {% csrf_token %}
             <button type="submit">トップページへ</button>
         </form>
     </main>
 </div>
-
 {% endblock %}

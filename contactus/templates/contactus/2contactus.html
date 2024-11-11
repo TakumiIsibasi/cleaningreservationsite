@@ -1,0 +1,23 @@
+<!-- templates/contactus/2contactus.html -->
+{% extends 'basea.html' %}
+
+{% block title %}
+    お問い合わせ
+{% endblock %}
+
+{% block content %}
+<div style="text-align: center;">
+    <main>
+        <h1>お問い合わせ</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">送信</button>
+        </form>
+        <form action="{% url 'reservation:mainmenu' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">戻る</button>
+        </form>
+    </main>
+</div>
+{% endblock %}
