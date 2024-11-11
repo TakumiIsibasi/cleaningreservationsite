@@ -1,0 +1,24 @@
+<!-- templates/home.html -->
+{% extends 'baseb.html' %}
+
+{% block title %}
+    <h1>新規登録</h1>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.name.label_tag }} {{ form.name }}
+        {{ form.phone.label_tag }} {{ form.phone }}
+        {{ form.email.label_tag }} {{ form.email }}
+        {{ form.password.label_tag }} {{ form.password }}
+        <button type="submit">新規登録</button>
+    </form>
+
+    <!-- ログイン後ホーム画面ページに遷移するボタン -->
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">戻る</button>
+    </form>
+{% endblock %}
