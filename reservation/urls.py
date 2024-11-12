@@ -11,5 +11,5 @@ urlpatterns = [
     path("reservationchangecompleted", views.reservationchangecompleted, name="reservationchangecompleted"),
     path("reservationcancellationcompleted", views.reservationcancellationcompleted, name="reservationcancellationcompleted"),
     path("Reservation_list", views.Reservation_list, name="Reservation_list"),
-    path("userreservationdetails", views.userreservationdetails, name="userreservationdetails"),  
+    path("Reservation_detail/<uuid:user_reservation_id>", views.Reservation_detail, name="Reservation_detail"),
 ]

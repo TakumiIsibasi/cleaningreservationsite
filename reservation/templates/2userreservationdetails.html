@@ -1,4 +1,3 @@
-<!-- templates/home.html -->
 {% extends 'basea.html' %}
 
 <!-- 予約詳細画面 -->
@@ -8,7 +7,7 @@
 
 {% block content %}
 {% load static %}
-<div style="text-align: center;">
+
     <!-- 予約変更画面に遷移するボタン -->
     <form action="{% url 'reservation:reservationchange' %}" method="post">
         {% csrf_token %}
@@ -19,29 +18,17 @@
         {% csrf_token %}
         <button type="submit">キャンセル</button>
     </form>
-    <div>
-        <label for="name">名前</label>
-    </div>
-    <div>
-        <label for="phone">電話番号</label>
-    </div>
-    <div>
-        <label for="email">メールアドレス</label>
-    </div>
-    <div>
-        <label for="address">住所</label>
-    </div>
-    <div>
-        <label for="cleaning-location">清掃場所</label>
-    </div>
-    <div>
-        <label for="cleaning-date">清掃日時</label>
-    </div>
-    <div>
-        <label for="notes">備考欄</label>
-    </div>
+     
+    <div>名前: {{ user_reservation.user_name }}</div>
+    <div>電話番号: {{ user_reservation.user_phone }}</div>
+    <div>メールアドレス: {{ user_reservation.user_email }}</div>
+    <div>住所: {{ user_reservation.user_addres }}</div>
+    <div>清掃場所: {{ user_reservation.user_cleaning_location }}</div>
+    <div>清掃日時: {{ user_reservation.user_cleaning_date }}</div>
+    <div>備考欄: {{ user_reservation.user_comments }}</div>
+
     <!-- 予約一覧画面に遷移するボタン -->
-    <form action="{% url 'reservation:userreservationlistscreen' %}" method="post">
+    <form action="{% url 'reservation:Reservation_list' %}" method="post">
         {% csrf_token %}
         <button type="submit">戻る</button>
     </form>
