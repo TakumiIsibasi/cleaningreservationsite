@@ -5,6 +5,8 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),  # これは元からある
     path("", include("accounts.urls")),  # accountsアプリのurls
+    path("adminaccounts/", include("adminaccounts.urls")),  # accountsアプリのurls
+    path("employeeaccounts/", include("employeeaccounts.urls")),  # accountsアプリのurls
     path("reservation/", include("reservation.urls")),  # reservationのurls
     path("contactus/", include("contactus.urls")),  # contactusのurls
 ]
