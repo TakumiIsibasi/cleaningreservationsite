@@ -6,18 +6,18 @@
 {% endblock %}
 
 {% block content %}
-<div style="text-align: center;">
-    <main>
-        <h1>お問い合わせ</h1>
-        <form method="POST">
-            {% csrf_token %}
+<div class="container text-center my-5">
+    <h1 class="mb-4">お問い合わせ</h1>
+    <form method="POST" class="mb-3 mx-auto" style="max-width: 500px;">
+        {% csrf_token %}
+        <div class="form-group">
             {{ form.as_p }}
-            <button type="submit">送信</button>
-        </form>
-        <form action="{% url 'reservation:mainmenu' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">戻る</button>
-        </form>
-    </main>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mb-2">送信</button>
+    </form>
+    <form action="{% url 'reservation:mainmenu' %}" method="post" class="mx-auto" style="max-width: 500px;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-secondary w-100">戻る</button>
+    </form>
 </div>
 {% endblock %}

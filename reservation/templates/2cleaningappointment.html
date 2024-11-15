@@ -6,25 +6,54 @@
 {% endblock %}
 
 {% block content %}
-{% load static %}
-    <form method="POST">
+<div class="container mt-4">
+    <h2 class="mb-4">予約フォーム</h2>
+
+    <form method="POST" class="mb-4">
         {% csrf_token %}
-        {{ form.user_name.label_tag }} {{ form.user_name }}
-        {{ form.user_phone.label_tag }} {{ form.user_phone }}
-        {{ form.user_email.label_tag }} {{ form.user_email }}
-        {{ form.user_addres.label_tag }} {{ form.user_addres }}
-        {{ form.user_cleaning_location.label_tag }} {{ form.user_cleaning_location }}
         
-        {{ form.user_cleaning_date.label_tag }}
-        <input type="datetime-local" name="user_cleaning_date" required>
+        <div class="mb-3">
+            {{ form.user_name.label_tag }}
+            <input type="text" name="user_name" class="form-control">
+        </div>
         
-        {{ form.user_comments.label_tag }} {{ form.user_comments }}
-        <button type="submit">保存</button>
+        <div class="mb-3">
+            {{ form.user_phone.label_tag }}
+            <input type="text" name="user_phone" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            {{ form.user_email.label_tag }}
+            <input type="email" name="user_email" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            {{ form.user_addres.label_tag }}
+            <input type="text" name="user_addres" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            {{ form.user_cleaning_location.label_tag }}
+            <input type="text" name="user_cleaning_location" class="form-control">
+        </div>
+        
+        <div class="mb-3">
+            {{ form.user_cleaning_date.label_tag }}
+            <input type="datetime-local" name="user_cleaning_date" class="form-control" required>
+        </div>
+        
+        <div class="mb-3">
+            {{ form.user_comments.label_tag }}
+            <textarea name="user_comments" class="form-control"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">送信</button>
     </form>
 
     <!-- ログイン後ホーム画面ページに遷移するボタン -->
     <form action="{% url 'reservation:mainmenu' %}" method="post">
         {% csrf_token %}
-        <button type="submit">戻る</button>
+        <button type="submit" class="btn btn-secondary">戻る</button>
     </form>
+</div>
 {% endblock %}
