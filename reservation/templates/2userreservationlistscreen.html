@@ -8,7 +8,11 @@
 {% block content %}
 <ul>
     {% for user_reservation in Reservation_list %}
-        <li>清掃場所: {{ user_reservation.user_cleaning_location }}　清掃日時: {{ user_reservation.user_cleaning_date }} </li>
+        <li>
+            <a href="{% url 'reservation:Reservation_detail' user_reservation.user_reservation_id %}">
+                清掃場所: {{ user_reservation.user_cleaning_location }}　清掃日時: {{ user_reservation.user_cleaning_date }}
+            </a> 
+        </li>    
     {% empty %}
         <div>清掃予約は一つもありません。</div>    
     {% endfor %}
