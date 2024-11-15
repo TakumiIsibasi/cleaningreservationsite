@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .forms import UserForm
 from .models import user_reservation
@@ -54,7 +54,12 @@ class UserReservationListView(View):
         # Handle POST request if needed (e.g., filtering or deleting reservations)
         return self.get(request)  # Optionally, re-render the list after handling POST
 
+class UserReservationDetailView(View):
+    def get(self, request, user_reservation_id):
+        reservation = get_object_or_404(user_reservation, user_reservation_id=user_reservation_id)
+        return render(request, "2userreservationdetails.html", {"user_reservation": reservation})
 
 
 cleaningappointment = UserReservationView.as_view()
 Reservation_list = UserReservationListView.as_view()
+Reservation_detail = UserReservationDetailView.as_view()
