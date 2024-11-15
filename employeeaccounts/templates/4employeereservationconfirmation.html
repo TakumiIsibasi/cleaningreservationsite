@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>清掃依頼確認</title>
+</head>
+<body>
+    <h1>清掃依頼確認</h1>
+
+    <!-- メール風のカード -->
+    <div class="email-card" onclick="goToDetailPage('employee-details.html')">
+        <p class="email-title">山田 太郎</p>
+        <p class="email-details">清掃場所: 東京都新宿区1-1-1</p>
+        <p class="email-details">清掃日時: 2024-11-01 10:00</p>
+    </div>
+
+    <div class="email-card" onclick="goToDetailPage('employee-details2.html')">
+        <p class="email-title">佐藤 花子</p>
+        <p class="email-details">清掃場所: 東京都渋谷区2-2-2</p>
+        <p class="email-details">清掃日時: 2024-11-02 14:00</p>
+    </div>
+
+    <script>
+        // クリックした際に詳細ページへ移動する関数
+        function goToDetailPage(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
