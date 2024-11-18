@@ -59,7 +59,27 @@ class UserReservationDetailView(View):
         reservation = get_object_or_404(user_reservation, user_reservation_id=user_reservation_id)
         return render(request, "2userreservationdetails.html", {"user_reservation": reservation})
 
+class UserReservationUpdateView(View):
+    def get(self, request, user_reservation_id):
+        reservation = get_object_or_404(user_reservation, user_reservation_id=user_reservation_id)
+        form = UserForm(instance=reservation)
+        return render(request, "2reservationchange.html", {
+            "form": form, 
+            "user_reservation_id": user_reservation_id
+        })
+
+
+    def post(self, request, user_reservation_id):
+        reservation = get_object_or_404(user_reservation, user_reservation_id=user_reservation_id)
+        form = UserForm(request.POST, instance=reservation)
+        if form.is_valid():
+            form.save()
+            return redirect("reservation:Reservation_detail", user_reservation_id=user_reservation_id)
+        return render(request, "2reservationchange.html", {"form": form, "user_reservation_id": user_reservation_id})
+
+
 
 cleaningappointment = UserReservationView.as_view()
 Reservation_list = UserReservationListView.as_view()
 Reservation_detail = UserReservationDetailView.as_view()
+Reservation_update = UserReservationUpdateView.as_view()
