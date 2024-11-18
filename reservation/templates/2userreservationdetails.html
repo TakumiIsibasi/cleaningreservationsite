@@ -1,6 +1,6 @@
+<!-- 予約詳細画面 -->
 {% extends 'basea.html' %}
 
-<!-- 予約詳細画面 -->
 {% block title %}
     予約詳細
 {% endblock %}
@@ -8,30 +8,28 @@
 {% block content %}
 {% load static %}
 
-    <!-- 予約変更画面に遷移するボタン -->
-    <form action="{% url 'reservation:reservationchange' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">変更</button>
-    </form>
-    <!-- 予約キャンセル画面に遷移するボタン -->
-    <form action="{% url 'reservation:reservationcancellationcompleted' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">キャンセル</button>
-    </form>
-     
-    <div>名前: {{ user_reservation.user_name }}</div>
-    <div>電話番号: {{ user_reservation.user_phone }}</div>
-    <div>メールアドレス: {{ user_reservation.user_email }}</div>
-    <div>住所: {{ user_reservation.user_addres }}</div>
-    <div>清掃場所: {{ user_reservation.user_cleaning_location }}</div>
-    <div>清掃日時: {{ user_reservation.user_cleaning_date }}</div>
-    <div>備考欄: {{ user_reservation.user_comments }}</div>
+<!-- 予約変更画面に遷移するボタン -->
+<form action="{% url 'reservation:Reservation_update' user_reservation.user_reservation_id %}" method="get">
+    <button type="submit">変更</button>
+</form>
 
-    <!-- 予約一覧画面に遷移するボタン -->
-    <form action="{% url 'reservation:Reservation_list' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">戻る</button>
-    </form>
-</div>
+<!-- 予約キャンセル画面に遷移するボタン -->
+<form action="{% url 'reservation:reservationcancellationcompleted' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">キャンセル</button>
+</form>
+
+<div>名前: {{ user_reservation.user_name }}</div>
+<div>電話番号: {{ user_reservation.user_phone }}</div>
+<div>メールアドレス: {{ user_reservation.user_email }}</div>
+<div>住所: {{ user_reservation.user_addres }}</div>
+<div>清掃場所: {{ user_reservation.user_cleaning_location }}</div>
+<p>清掃時間: {{ user_reservation.user_cleaning_date|date:"Y-m-d H:i" }}</p>
+<div>備考欄: {{ user_reservation.user_comments }}</div>
+
+<!-- 予約一覧画面に戻るボタン -->
+<form action="{% url 'reservation:Reservation_list' %}" method="get">
+    <button type="submit">戻る</button>
+</form>
 
 {% endblock %}
