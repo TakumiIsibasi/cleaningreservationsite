@@ -1,6 +1,5 @@
 {% extends 'baseb.html' %}
 
-<!-- ログイン画面 -->
 {% block title %}
     ログイン
 {% endblock %}
@@ -9,28 +8,21 @@
 <div class="container my-5">
     <h1 class="mb-4">ログイン</h1>
 
-    <div class="mb-3">
-        <label for="email" class="form-label">メールアドレス</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>
+    <form action="{% url 'userlogin' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
 
-    <div class="mb-3">
-        <label for="password" class="form-label">パスワード</label>
-        <input type="password" class="form-control" id="password" name="password" required>
-    </div>
+        <!-- エラーメッセージの表示 -->
+        {% if error_message %}
+        <div class="alert alert-danger mt-3">
+            {{ error_message }}
+        </div>
+        {% endif %}
 
-    <div class="d-flex justify-content-between">
-        <!-- 左側のトップページへボタン -->
-        <form action="{% url 'index' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-secondary">トップページへ</button>
-        </form>
-
-        <!-- 右側のログインボタン（青色）-->
-        <form action="{% url 'reservation:mainmenu' %}" method="post">
-            {% csrf_token %}
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'index' %}" class="btn btn-secondary">トップページへ</a>
             <button type="submit" class="btn btn-primary">ログイン</button>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 {% endblock %}

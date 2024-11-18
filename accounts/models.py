@@ -17,6 +17,7 @@ class User(models.Model):
  
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
+        self.save()
  
         #ハッシュ化にこれをつかうらしい↑↓
         #user = User(name="example_name", phone="1234567890", email="example@example.com", address="Some Address")
