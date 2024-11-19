@@ -130,3 +130,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+
+EMAIL_HOST = 'smtp-mail.outlook.com' # 大原のメールサーバー
+EMAIL_PORT = 587 # 大原の設定値
+
+# 各自が stu の MicrosoftAccount に設定しているパスワード
+EMAIL_HOST_PASSWORD = '39SuKinn'
+
+# 各自が stu の メールアドレス
+DEFAULT_FROM_EMAIL = 'fko2347037@stu.o-hara.ac.jp'
+EMAIL_HOST_USER = 'fko2347037@stu.o-hara.ac.jp'
+
+# これは固定でTrue
+EMAIL_USE_TLS = True
