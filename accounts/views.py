@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import SignUpForm
+from django.contrib.auth import login
+from django.contrib.auth.hashers import check_password
+from django.http import HttpResponse, HttpResponseRedirect
+from .forms import SignUpForm, SignInForm
 from .models import User
 
 # ログイン前ホーム画面
@@ -9,7 +12,30 @@ def index(request):
 
 # ログイン画面
 def userlogin(request):
-    return render(request, '1userlogin.html')
+    form = SignInForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return render(request, '1userlogin.html', {
+                'form': form,
+                'error_message': "メールアドレスまたはパスワードが正しくありません。",
+            })
+
+        # パスワード検証
+        if check_password(password, user.password):
+            # ログイン成功後、reservation:mainmenuにリダイレクト
+            return redirect('reservation:mainmenu')  
+        else:
+            return render(request, '1userlogin.html', {
+                'form': form,
+                'error_message': "メールアドレスまたはパスワードが正しくありません。",
+            })
+
+    return render(request, '1userlogin.html', {'form': form})
 
 # ログアウト画面
 def logout(request):
