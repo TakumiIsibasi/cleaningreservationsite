@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .forms import UserForm
 from .models import user_reservation
+from django.contrib.auth.decorators import login_required
 
 # 利用者ログイン後ホーム画面
+@login_required
 def mainmenu(request):
     return render(request, '2mainmenu.html')
 
