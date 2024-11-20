@@ -140,7 +140,7 @@ EMAIL_USE_TLS = True
 # 各自が stu の メールアドレス
 EMAIL_HOST_USER = 'fko2347037@stu.o-hara.ac.jp'
 # 各自が stu の MicrosoftAccount に設定しているパスワード
-EMAIL_HOST_PASSWORD = 'mikusuki'
+EMAIL_HOST_PASSWORD = '39SuKinn'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 

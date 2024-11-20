@@ -23,7 +23,7 @@ class ContactUsCreateView(View):
                             f"メールアドレス: {form.cleaned_data['contactus_email']}\n"
                             f"メッセージ: {form.cleaned_data['contactus_message']}",
                     from_email=None,  # settings.DEFAULT_FROM_EMAILが使われます
-                    recipient_list=["admin@example.com"],  # 管理者のメールアドレス
+                    recipient_list=["fko2347037@stu.o-hara.ac.jp"],  # 管理者のメールアドレス
                 )
             except BadHeaderError:
                 return HttpResponse("無効なヘッダーが検出されました。")
