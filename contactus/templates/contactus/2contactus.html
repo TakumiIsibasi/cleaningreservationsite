@@ -1,22 +1,46 @@
 {% extends 'basea.html' %}
+{% load custom_filters %}
 
 {% block title %}
     お問い合わせ
 {% endblock %}
 
 {% block content %}
-<div class="container text-center my-5">
-    <h1 class="mb-4">お問い合わせ</h1>
-    <form method="POST" class="mb-3 mx-auto" style="max-width: 500px;">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.as_p }}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">お問い合わせ</h1>
+        <p class="text-muted">以下のフォームに必要事項を入力し、「送信」ボタンを押してください。</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-group mb-3">
+                            {{ form.contactus_name.label_tag }}
+                            {{ form.contactus_name|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form.contactus_email.label_tag }}
+                            {{ form.contactus_email|add_class:"form-control" }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form.contactus_message.label_tag }}
+                            {{ form.contactus_message|add_class:"form-control" }}
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">送信</button>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <form action="{% url 'reservation:mainmenu' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary">戻る</button>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary w-100 mb-2">送信</button>
-    </form>
-    <form action="{% url 'reservation:mainmenu' %}" method="post" class="mx-auto" style="max-width: 500px;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-secondary w-100">戻る</button>
-    </form>
+    </div>
 </div>
 {% endblock %}
