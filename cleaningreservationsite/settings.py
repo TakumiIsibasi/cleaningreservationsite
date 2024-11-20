@@ -138,9 +138,11 @@ EMAIL_PORT = 587 # 大原の設定値
 EMAIL_USE_TLS = True
 
 # 各自が stu の メールアドレス
-EMAIL_HOST_USER = 'fko2347037@stu.o-hara.ac.jp'
+EMAIL_HOST_USER = 'fko2347076@stu.o-hara.ac.jp'
 # 各自が stu の MicrosoftAccount に設定しているパスワード
-EMAIL_HOST_PASSWORD = '39SuKinn'
+EMAIL_HOST_PASSWORD = 'Riichi0806'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 
