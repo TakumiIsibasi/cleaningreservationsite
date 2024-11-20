@@ -1,57 +1,58 @@
-{% extends 'basea.html' %}
+{% extends 'basea.html' %}  <!-- 基本レイアウトテンプレート(basea.html)を継承 -->
 
 {% block title %}
-    予約詳細
+    予約詳細  <!-- ページタイトルに「予約詳細」を表示 -->
 {% endblock %}
 
 {% block content %}
-{% load static %}
+{% load static %}  <!-- 静的ファイル（画像、CSS、JSなど）の読み込み -->
 
 <div class="container mt-4">
     <div class="mb-4">
         <!-- 予約変更画面に遷移するボタン -->
         <form action="{% url 'reservation:Reservation_update' user_reservation.user_reservation_id %}" method="get" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary">変更</button>
+            {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
+            <button type="submit" class="btn btn-primary">変更</button>  <!-- 予約変更画面に遷移するボタン -->
         </form>
 
         <!-- 予約キャンセル画面に遷移するボタン -->
         <form action="{% url 'reservation:reservationcancellationcompleted' %}" method="post" class="d-inline">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">キャンセル</button>
+            {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
+            <button type="submit" class="btn btn-danger">キャンセル</button>  <!-- 予約キャンセル画面に遷移するボタン -->
         </form>
     </div>
 
     <div class="card p-3">
         <h5 class="card-title mb-4">予約詳細</h5>
         
+        <!-- 予約詳細の情報を表示 -->
         <div class="mb-2">
-            <strong>名前:</strong> {{ user_reservation.user_name }}
+            <strong>名前:</strong> {{ user_reservation.user_name }}  <!-- 予約者の名前 -->
         </div>
         <div class="mb-2">
-            <strong>電話番号:</strong> {{ user_reservation.user_phone }}
+            <strong>電話番号:</strong> {{ user_reservation.user_phone }}  <!-- 予約者の電話番号 -->
         </div>
         <div class="mb-2">
-            <strong>メールアドレス:</strong> {{ user_reservation.user_email }}
+            <strong>メールアドレス:</strong> {{ user_reservation.user_email }}  <!-- 予約者のメールアドレス -->
         </div>
         <div class="mb-2">
-            <strong>住所:</strong> {{ user_reservation.user_addres }}
+            <strong>住所:</strong> {{ user_reservation.user_addres }}  <!-- 予約者の住所 -->
         </div>
         <div class="mb-2">
-            <strong>清掃場所:</strong> {{ user_reservation.user_cleaning_location }}
+            <strong>清掃場所:</strong> {{ user_reservation.user_cleaning_location }}  <!-- 清掃場所 -->
         </div>
         <div class="mb-2">
-            <strong>清掃日時:</strong> {{ user_reservation.user_cleaning_date }}
+            <strong>清掃日時:</strong> {{ user_reservation.user_cleaning_date }}  <!-- 清掃予定日時 -->
         </div>
         <div class="mb-2">
-            <strong>備考欄:</strong> {{ user_reservation.user_comments }}
+            <strong>備考欄:</strong> {{ user_reservation.user_comments }}  <!-- 予約に関するコメント -->
         </div>
     </div>
 
     <!-- 予約一覧画面に遷移するボタン -->
     <form action="{% url 'reservation:Reservation_list' %}" method="post" class="mt-3">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-secondary">戻る</button>
+        {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
+        <button type="submit" class="btn btn-secondary">戻る</button>  <!-- 予約一覧画面に戻るためのボタン -->
     </form>
 </div>
 

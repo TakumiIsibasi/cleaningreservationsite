@@ -1,59 +1,70 @@
 <!-- templates/home.html -->
-{% extends 'basea.html' %}
- 
+
+{% extends 'basea.html' %}  <!-- 基本となるレイアウトテンプレート(basea.html)を継承 -->
+
 {% block title %}
-    予約
+    予約  <!-- タイトルブロックに「予約」と表示 -->
 {% endblock %}
- 
+
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">予約フォーム</h2>
- 
+    <h2 class="mb-4">予約フォーム</h2>  <!-- フォームの見出し -->
+
+    <!-- 予約フォーム -->
     <form method="POST" class="mb-4">
-        {% csrf_token %}
+        {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
        
+        <!-- 名前入力欄 -->
         <div class="mb-3">
-            {{ form.user_name.label_tag }}
-            <input type="text" name="user_name" class="form-control">
+            {{ form.user_name.label_tag }}  <!-- ラベルを表示 -->
+            <input type="text" name="user_name" class="form-control">  <!-- ユーザーの名前入力 -->
         </div>
        
+        <!-- 電話番号入力欄 -->
         <div class="mb-3">
-            {{ form.user_phone.label_tag }}
-            <input type="text" name="user_phone" class="form-control">
+            {{ form.user_phone.label_tag }}  <!-- ラベルを表示 -->
+            <input type="text" name="user_phone" class="form-control">  <!-- ユーザーの電話番号入力 -->
         </div>
        
+        <!-- メールアドレス入力欄 -->
         <div class="mb-3">
-            {{ form.user_email.label_tag }}
-            <input type="email" name="user_email" class="form-control">
+            {{ form.user_email.label_tag }}  <!-- ラベルを表示 -->
+            <input type="email" name="user_email" class="form-control">  <!-- ユーザーのメールアドレス入力 -->
         </div>
        
+        <!-- 住所入力欄 -->
         <div class="mb-3">
-            {{ form.user_addres.label_tag }}
-            <input type="text" name="user_addres" class="form-control">
+            {{ form.user_addres.label_tag }}  <!-- ラベルを表示 -->
+            <input type="text" name="user_addres" class="form-control">  <!-- ユーザーの住所入力 -->
         </div>
        
+        <!-- 清掃場所入力欄 -->
         <div class="mb-3">
-            {{ form.user_cleaning_location.label_tag }}
-            <input type="text" name="user_cleaning_location" class="form-control">
+            {{ form.user_cleaning_location.label_tag }}  <!-- ラベルを表示 -->
+            <input type="text" name="user_cleaning_location" class="form-control">  <!-- クリーニング場所入力 -->
         </div>
        
+        <!-- 清掃日時入力欄 -->
         <div class="mb-3">
-            {{ form.user_cleaning_date.label_tag }}
-            <input type="datetime-local" name="user_cleaning_date" class="form-control" required>
+            {{ form.user_cleaning_date.label_tag }}  <!-- ラベルを表示 -->
+            <input type="datetime-local" name="user_cleaning_date" class="form-control" required>  <!-- クリーニング日時入力 -->
         </div>
        
+        <!-- 備考欄 -->
         <div class="mb-3">
-            {{ form.user_comments.label_tag }}
-            <textarea name="user_comments" class="form-control"></textarea>
+            {{ form.user_comments.label_tag }}  <!-- ラベルを表示 -->
+            <textarea name="user_comments" class="form-control"></textarea>  <!-- ユーザーのコメント入力 -->
         </div>
        
-        <button type="submit" class="btn btn-primary">送信</button>
+        <!-- 送信ボタン -->
+        <button type="submit" class="btn btn-primary">送信</button>  <!-- フォーム送信ボタン -->
     </form>
- 
-    <!-- ログイン後ホーム画面ページに遷移するボタン -->
+
+    <!-- 戻るボタン -->
+    <!-- ログイン後ホーム画面ページに遷移するためのボタン -->
     <form action="{% url 'reservation:mainmenu' %}" method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-secondary">戻る</button>
+        {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
+        <button type="submit" class="btn btn-secondary">戻る</button>  <!-- 戻るボタン -->
     </form>
 </div>
 {% endblock %}

@@ -1,21 +1,20 @@
-<!-- templates/home.html -->
-{% extends 'basea.html' %}
+{% extends 'basea.html' %}  <!-- 基本レイアウトテンプレート(basea.html)を継承 -->
 
-<!-- 予約完了ページ -->
 {% block title %}
-    予約完了
+    予約完了  <!-- ページタイトルに「予約完了」を表示 -->
 {% endblock %}
 
 {% block content %}
-{% load static %}
+{% load static %}  <!-- 静的ファイル（画像、CSS、JSなど）の読み込み -->
+
 <div style="text-align: center;">
-    <p>予約が完了しました</p>
-        
-        <!-- 予約一覧画面に遷移するボタン -->
-        <form action="{% url 'reservation:Reservation_list' %}" method="post">
-            {% csrf_token %}
-            <button type="submit">予約一覧へ</button>
-        </form>
+    <p>予約が完了しました</p>  <!-- 予約が正常に完了した旨のメッセージ -->
+    
+    <!-- 予約一覧画面に遷移するボタン -->
+    <form action="{% url 'reservation:Reservation_list' %}" method="post">
+        {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
+        <button type="submit">予約一覧へ</button>  <!-- 予約一覧画面に戻るためのボタン -->
+    </form>
 </div>
 
 {% endblock %}

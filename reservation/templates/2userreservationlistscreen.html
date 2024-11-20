@@ -1,34 +1,37 @@
-{% extends 'basea.html' %}
- 
+{% extends 'basea.html' %}  <!-- 基本レイアウトテンプレート(basea.html)を継承 -->
+
 <!-- 予約一覧画面 -->
 {% block title %}
-    予約一覧
+    予約一覧  <!-- ページタイトルに「予約一覧」を表示 -->
 {% endblock %}
- 
+
 {% block content %}
 <div class="container mt-4">
-    <h2 class="mb-4">予約一覧</h2>
-   
+    <h2 class="mb-4">予約一覧</h2>  <!-- 「予約一覧」の見出し -->
+
     <ul class="list-group mb-4">
+        <!-- 予約リストの各予約を表示 -->
         {% for user_reservation in Reservation_list %}
             <li class="list-group-item">
+                <!-- 予約詳細画面に遷移するリンク -->
                 <a href="{% url 'reservation:Reservation_detail' user_reservation.user_reservation_id %}" class="text-decoration-none">
+                    <!-- 清掃場所と日時を表示 -->
                     <strong>清掃場所:</strong> {{ user_reservation.user_cleaning_location }}　
                     <strong>清掃日時:</strong> {{ user_reservation.user_cleaning_date }}
                 </a>
-            </li>    
+            </li>
         {% empty %}
+            <!-- 予約がない場合に表示するメッセージ -->
             <div class="alert alert-warning text-center" role="alert">
                 清掃予約は一つもありません。
             </div>
         {% endfor %}
     </ul>
- 
+
     <!-- ログイン前ホーム画面に遷移するボタン -->
     <form action="{% url 'reservation:mainmenu' %}" method="get">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-secondary">戻る</button>
+        {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
+        <button type="submit" class="btn btn-secondary">戻る</button>  <!-- ホーム画面に戻るボタン -->
     </form>
 </div>
 {% endblock %}
- 
