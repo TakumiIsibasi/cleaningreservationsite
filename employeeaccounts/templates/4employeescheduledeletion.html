@@ -1,21 +1,53 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スケジュール削除</title>
-</head>
-<body>
-    <h1>スケジュール削除</h1>
-    
-    <!-- スケジュール追加フォーム -->
-    <form id="scheduleForm">
-        <input type="hidden" id="user_id" value="1">
-        <input type="date" id="date" required placeholder="日付を選択">
-        <input type="time" id="start_time" required placeholder="開始時間を入力">
-        <input type="time" id="end_time" required placeholder="終了時間を入力">
-        <button type="submit">スケジュール削除</button>
-    </form>
+{% extends 'basec.html' %}  <!-- 基本レイアウトテンプレート(basec.html)を継承 -->
+
+{% block title %}
+    スケジュール削除
+{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h1 class="mb-4">スケジュール削除</h1>
+        
+        <!-- スケジュール削除フォーム -->
+        <form id="scheduleForm" class="needs-validation" novalidate>
+            <input type="hidden" id="user_id" value="1">
+
+            <div class="mb-3">
+                <label for="date" class="form-label">日付を選択</label>
+                <input type="date" id="date" class="form-control" required>
+                <div class="invalid-feedback">日付を選択してください。</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="start_time" class="form-label">開始時間を入力</label>
+                <input type="time" id="start_time" class="form-control" required>
+                <div class="invalid-feedback">開始時間を入力してください。</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="end_time" class="form-label">終了時間を入力</label>
+                <input type="time" id="end_time" class="form-control" required>
+                <div class="invalid-feedback">終了時間を入力してください。</div>
+            </div>
+
+            <button type="submit" class="btn btn-danger">スケジュール削除</button>
+        </form>
     </div>
-</body>
-</html>
+
+    <script>
+        // フォームのバリデーションを有効化
+        (function () {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+{% endblock %}

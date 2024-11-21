@@ -1,73 +1,77 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>従業員メニュー</title>
+{% extends 'basec.html' %}  <!-- 基本レイアウトテンプレート(basec.html)を継承 -->
 
-</head>
-<body>
-    <h1>従業員メニュー</h1>
-    <button onclick="location.href='従業員スケジュール追加画面.html'">スケジュールを追加</button>
-    <button onclick="location.href='従業員スケジュール削除画面.html'">スケジュールを削除</button>
-    <button onclick="location.href='従業員スケジュール変更画面.html'">スケジュールを変更</button>
-</body>
-<body>
-    <table class="schedule-table">
-        <thead>
-            <tr>
-                <th>従業員名</th>
-                <th>09:00</th>
-                <th>10:00</th>
-                <th>11:00</th>
-                <th>12:00</th>
-                <th>13:00</th>
-                <th>14:00</th>
-                <th>15:00</th>
-                <th>16:00</th>
-                <th>17:00</th>
-            </tr>
-            
-        </thead>
-        <tbody>
-            <tr>
-                <td data-employee>佐藤</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td data-employee>鈴木</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td data-employee>高橋</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <!-- 他の従業員を追加できます -->
-        </tbody>
-    </table>
-</body>
-</html>
+{% block title %}
+    従業員メニュー
+{% endblock %}
+
+{% block content %}
+    <div class="container my-4">
+        <h1 class="mb-4">従業員メニュー</h1>
+
+        <!-- ボタンの配置 -->
+        <div class="mb-4">
+            <button class="btn btn-primary me-2" onclick="location.href='従業員スケジュール追加画面.html'">スケジュールを追加</button>
+            <button class="btn btn-danger me-2" onclick="location.href='従業員スケジュール削除画面.html'">スケジュールを削除</button>
+            <button class="btn btn-warning" onclick="location.href='従業員スケジュール変更画面.html'">スケジュールを変更</button>
+        </div>
+
+        <!-- スケジュールテーブル -->
+        <div class="table-responsive">
+            <table class="table table-bordered schedule-table">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">従業員名</th>
+                        <th scope="col">09:00</th>
+                        <th scope="col">10:00</th>
+                        <th scope="col">11:00</th>
+                        <th scope="col">12:00</th>
+                        <th scope="col">13:00</th>
+                        <th scope="col">14:00</th>
+                        <th scope="col">15:00</th>
+                        <th scope="col">16:00</th>
+                        <th scope="col">17:00</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-employee="佐藤">佐藤</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td data-employee="鈴木">鈴木</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td data-employee="高橋">高橋</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <!-- 他の従業員を追加できます -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

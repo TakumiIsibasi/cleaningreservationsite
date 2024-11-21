@@ -1,22 +1,38 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>スケジュール追加</title>
-</head>
-<body>
-    <h1>スケジュール追加
-    </h1>
-    
+{% extends 'basec.html' %}  <!-- 修正: 適切なベーステンプレート basea.html を継承 -->
+
+{% block title %}
+    スケジュール追加
+{% endblock %}
+
+{% block content %}
+    <h1 class="my-4">スケジュール追加</h1>
+ 
     <!-- スケジュール追加フォーム -->
-    <form id="scheduleForm">
-        <input type="hidden" id="user_id" value="1">
-        <input type="date" id="date" required placeholder="日付を選択">
-        <input type="time" id="start_time" required placeholder="開始時間を入力">
-        <input type="time" id="end_time" required placeholder="終了時間を入力">
-        <button type="submit">スケジュールを追加</button>
+    <form id="scheduleForm" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <input type="hidden" id="user_id" value="1">
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">日付を選択</label>
+            <input type="date" id="date" class="form-control" required>
+            <div class="invalid-feedback">
+                有効な日付を選択してください。
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="start_time" class="form-label">開始時間</label>
+            <input type="time" id="start_time" class="form-control" required>
+            <div class="invalid-feedback">
+                開始時間を入力してください。
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="end_time" class="form-label">終了時間</label>
+            <input type="time" id="end_time" class="form-control" required>
+            <div class="invalid-feedback">
+                終了時間を入力してください。
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">スケジュールを追加</button>
     </form>
-    </div>
-</body>
-</html>
+{% endblock %}

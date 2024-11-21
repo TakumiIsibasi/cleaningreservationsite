@@ -1,6 +1,10 @@
 from django.shortcuts import render
 
-# 従業員メニュー
+# 従業員ホーム
+def employeehome(request):
+    return render(request, '4employeehome.html')
+
+# 従業員スケジュールメニュー
 def employeescheduleconfirmation(request):
     return render(request, '4employeescheduleconfirmation.html')
 
