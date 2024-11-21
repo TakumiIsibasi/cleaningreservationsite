@@ -8,7 +8,11 @@
 
 {% block content %}
 {% load static %}
-<div style="text-align: center;">
-    <img src="{% static 'images/169023_0.jpg' %}" alt="Example Image" class="image-class">
+<div class="content-wrapper" style="text-align: center; margin-top: 30px;">
+    <!-- サンプル画像を表示 -->
+    <div class="image-container" style="margin-bottom: 20px;">
+        <img src="{% static 'images/169023_0.jpg' %}" alt="Example Image" class="image-class" 
+             style="max-width: 80%; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    </div>
 </div>
 {% endblock %}
