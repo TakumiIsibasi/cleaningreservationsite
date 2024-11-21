@@ -4,10 +4,10 @@ from . import views
 app_name = "employeeaccounts" 
 
 urlpatterns = [
+    path("", views.employeescheduleconfirmation, name="employeescheduleconfirmation"),
     path("employeereservationconfirmation", views.employeereservationconfirmation, name="employeereservationconfirmation"),
+    path("reservationdetailsconfirmation", views.reservationdetailsconfirmation, name="reservationdetailsconfirmation"),
     path("employeescheduleaddition", views.employeescheduleaddition, name="employeescheduleaddition"),
     path("employeeschedulechange", views.employeeschedulechange, name="employeeschedulechange"),
-    path("employeescheduleconfirmation", views.employeescheduleconfirmation, name="employeescheduleconfirmation"),
-    path("administratorrequestschedulechange", views.administratorrequestschedulechange, name="administratorrequestschedulechange"),
-    path("administratorrequestscheduleconfirmation", views.administratorrequestscheduleconfirmation, name="administratorrequestscheduleconfirmation"), 
+    path("employeescheduledeletion", views.employeescheduledeletion, name="employeescheduledeletion"), 
 ]
