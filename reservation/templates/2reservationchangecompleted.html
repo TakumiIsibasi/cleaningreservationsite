@@ -1,20 +1,32 @@
-{% extends 'basea.html' %}  <!-- 基本レイアウトテンプレート(basea.html)を継承 -->
+{% extends 'basea.html' %} <!-- 基本レイアウトテンプレートを継承 -->
 
+<!-- ページタイトル -->
 {% block title %}
-    予約変更完了  <!-- ページタイトルに「予約変更完了」を表示 -->
+    予約変更完了 
 {% endblock %}
 
 {% block content %}
-{% load static %}  <!-- 静的ファイル（画像、CSS、JSなど）の読み込み -->
+{% load static %} <!-- 静的ファイルの読み込み -->
 
-<div style="text-align: center;">
-    <p>予約を変更しました</p>  <!-- 変更が完了した旨のメッセージ -->
-    
-    <!-- 予約詳細画面に遷移するボタン -->
-    <form action="{% url 'reservation:userreservationdetails' %}" method="post">
-        {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
-        <button type="submit">戻る</button>  <!-- 予約詳細画面に戻るためのボタン -->
-    </form>
+<!-- コンテンツ全体を中央揃えにし、余白を調整 -->
+<div class="content-wrapper" style="text-align: center; margin-top: 50px; padding: 20px;">
+
+    <!-- 完了メッセージ -->
+    <div class="message-box" style="margin-bottom: 30px; font-size: 18px; color: #333;">
+        <p style="font-weight: bold;">予約を変更しました。</p> <!-- 目立つよう太字に -->
+    </div>
+
+    <!-- 予約詳細画面に戻るボタン -->
+    <div class="button-container">
+        <form action="{% url 'reservation:userreservationdetails' %}" method="post" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" class="btn"
+                    style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: 0.3s;">
+                予約詳細に戻る
+            </button>
+        </form>
+    </div>
+
 </div>
 
 {% endblock %}

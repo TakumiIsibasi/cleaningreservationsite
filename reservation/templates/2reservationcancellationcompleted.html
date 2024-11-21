@@ -1,25 +1,35 @@
 <!-- templates/home.html -->
 
-{% extends 'basea.html' %}  <!-- 基本レイアウトテンプレート(basea.html)を継承 -->
+{% extends 'basea.html' %}  <!-- 基本レイアウトテンプレートを継承 -->
 
 <!-- 予約キャンセル完了画面のタイトル -->
+ <!-- ページタイトル -->
 {% block title %}
-    予約キャンセル完了  <!-- ページタイトルに「予約キャンセル完了」を表示 -->
+    予約キャンセル完了 
 {% endblock %}
 
 {% block content %}
-{% load static %}  <!-- 静的ファイル（画像、CSS、JSなど）を読み込むためのタグをロード -->
+{% load static %} <!-- 静的ファイルの読み込み -->
 
-<div style="text-align: center;">  <!-- コンテンツを中央揃えにするためのスタイル -->
+<!-- コンテンツの中央揃えと余白調整 -->
+<div class="content-wrapper" style="text-align: center; margin-top: 50px; padding: 20px;">
 
     <!-- 予約キャンセル完了メッセージ -->
-    <p>予約をキャンセルしました</p>  <!-- 予約キャンセルが完了した旨のメッセージを表示 -->
-        
+    <div class="message-box" style="margin-bottom: 30px; font-size: 18px; color: #333;">
+        <p style="font-weight: bold;">予約をキャンセルしました。</p> <!-- 強調されたメッセージ -->
+    </div>
+
     <!-- 予約一覧画面に遷移するボタン -->
-    <form action="{% url 'reservation:Reservation_list' %}" method="post">
-        {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
-        <button type="submit">予約一覧へ</button>  <!-- 予約一覧ボタン -->
-    </form>
+    <div class="button-container">
+        <form action="{% url 'reservation:Reservation_list' %}" method="post" style="display: inline-block;">
+            {% csrf_token %}
+            <button type="submit" class="btn"
+                    style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: 0.3s;">
+                予約一覧を見る
+            </button>
+        </form>
+    </div>
+
 </div>
 
 {% endblock %}
