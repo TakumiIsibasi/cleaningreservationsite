@@ -10,11 +10,11 @@
 
         <!-- ボタンの配置 -->
         <div class="mb-4">
-            <button class="btn btn-primary me-2" onclick="location.href='従業員スケジュール追加画面.html'">スケジュールを追加</button>
-            <button class="btn btn-danger me-2" onclick="location.href='従業員スケジュール削除画面.html'">スケジュールを削除</button>
-            <button class="btn btn-warning" onclick="location.href='従業員スケジュール変更画面.html'">スケジュールを変更</button>
+            <a href="{% url 'employeeaccounts:employeescheduleaddition' %}" class="btn btn-primary me-2">スケジュールを追加</a>
+            <a href="{% url 'employeeaccounts:employeeschedulechange' %}" class="btn btn-primary me-2">スケジュールを変更</a>
+            <a href="{% url 'employeeaccounts:employeescheduledeletion' %}" class="btn btn-danger me-2">スケジュールを削除</a>
         </div>
-
+        
         <!-- スケジュールテーブル -->
         <div class="table-responsive">
             <table class="table table-bordered schedule-table">

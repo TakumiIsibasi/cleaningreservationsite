@@ -1,38 +1,36 @@
-{% extends 'basec.html' %}  <!-- 必要に応じて basea.html に変更 -->
+{% extends 'basec.html' %}  <!-- 基本レイアウトテンプレート(basec.html)を継承 -->
 
 {% block title %}
     スケジュール変更
 {% endblock %}
 
 {% block content %}
-    <h1 class="my-4">スケジュール変更</h1>
-    
-    <!-- スケジュール変更フォーム -->
-    <form id="scheduleForm" class="needs-validation" novalidate>
-        <div class="mb-3">
+    <div class="container my-4">
+        <h1 class="mb-4">スケジュール変更</h1>
+        
+        <!-- スケジュール変更フォーム -->
+        <form id="scheduleForm" class="needs-validation" novalidate>
             <input type="hidden" id="user_id" value="1">
-        </div>
-        <div class="mb-3">
-            <label for="date" class="form-label">日付を選択</label>
-            <input type="date" id="date" class="form-control" required>
-            <div class="invalid-feedback">
-                有効な日付を選択してください。
+
+            <div class="mb-3">
+                <label for="date" class="form-label">日付を選択</label>
+                <input type="date" id="date" class="form-control" required>
+                <div class="invalid-feedback">日付を選択してください。</div>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="start_time" class="form-label">開始時間</label>
-            <input type="time" id="start_time" class="form-control" required>
-            <div class="invalid-feedback">
-                開始時間を入力してください。
+
+            <div class="mb-3">
+                <label for="start_time" class="form-label">開始時間を入力</label>
+                <input type="time" id="start_time" class="form-control" required>
+                <div class="invalid-feedback">開始時間を入力してください。</div>
             </div>
-        </div>
-        <div class="mb-3">
-            <label for="end_time" class="form-label">終了時間</label>
-            <input type="time" id="end_time" class="form-control" required>
-            <div class="invalid-feedback">
-                終了時間を入力してください。
+
+            <div class="mb-3">
+                <label for="end_time" class="form-label">終了時間を入力</label>
+                <input type="time" id="end_time" class="form-control" required>
+                <div class="invalid-feedback">終了時間を入力してください。</div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary">スケジュール変更</button>
-    </form>
+
+            <button type="submit" class="btn btn-primary">スケジュール変更</button>
+        </form>
+    </div>
 {% endblock %}

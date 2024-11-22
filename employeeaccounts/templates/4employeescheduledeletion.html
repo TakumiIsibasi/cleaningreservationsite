@@ -32,22 +32,9 @@
 
             <button type="submit" class="btn btn-danger">スケジュール削除</button>
         </form>
+        <div class="mb-4">
+            <a href="{% url 'employeeaccounts:employeescheduleaddition' %}" class="btn btn-primary me-2">戻る</a>
+            
+        </div>
     </div>
-
-    <script>
-        // フォームのバリデーションを有効化
-        (function () {
-            'use strict';
-            const forms = document.querySelectorAll('.needs-validation');
-            Array.from(forms).forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        })();
-    </script>
 {% endblock %}
