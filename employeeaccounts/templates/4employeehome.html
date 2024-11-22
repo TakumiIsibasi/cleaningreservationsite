@@ -17,23 +17,10 @@
 
         <!-- ボタンのコンテナ -->
         <div class="button-container" style="margin-top: 20px;">
-            <!-- ボタン1 -->
-            <button class="btn" 
-                    style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 0 10px;">
-                ボタン1
-            </button>
-
-            <!-- ボタン2 -->
-            <button class="btn" 
-                    style="padding: 10px 20px; background-color: #2196F3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 0 10px;">
-                ボタン2
-            </button>
-
-            <!-- ボタン3 -->
-            <button class="btn" 
-                    style="padding: 10px 20px; background-color: #FF5722; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin: 0 10px;">
-                ボタン3
-            </button>
+            <div class="mb-4">
+                <a href="{% url 'employeeaccounts:employeescheduleconfirmation' %}" class="btn btn-primary me-2">従業員スケジュール</a>
+                <a href="{% url 'employeeaccounts:employeereservationconfirmation' %}" class="btn btn-primary me-2">清掃依頼確認</a>
+            </div>
         </div>
     </div>
 {% endblock %}

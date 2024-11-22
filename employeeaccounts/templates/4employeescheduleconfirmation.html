@@ -1,12 +1,12 @@
 {% extends 'basec.html' %}  <!-- 基本レイアウトテンプレート(basec.html)を継承 -->
 
 {% block title %}
-    従業員メニュー
+    従業員スケジュール
 {% endblock %}
 
 {% block content %}
     <div class="container my-4">
-        <h1 class="mb-4">従業員メニュー</h1>
+        <h1 class="mb-4">従業員スケジュール</h1>
 
         <!-- ボタンの配置 -->
         <div class="mb-4">
@@ -73,5 +73,9 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="mb-4">
+        <a href="{% url 'employeeaccounts:employeehome' %}" class="btn btn-primary me-2">戻る</a>
     </div>
 {% endblock %}
