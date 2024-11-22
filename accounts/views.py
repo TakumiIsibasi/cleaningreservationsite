@@ -29,7 +29,7 @@ def userlogin(request):
             if user.is_admin:  # 管理者用ページ
                 return redirect('adminaccounts:adminhome')
             elif user.is_staff_member:  # 従業員用ページ
-                return redirect('staff_dashboard')
+                return redirect('employeeaccounts:employeehome')
             else:  # 顧客用ページ
                 return redirect('reservation:mainmenu')
         else:
