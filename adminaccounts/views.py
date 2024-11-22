@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # 管理者ホーム画面
+@login_required
 def adminhome(request):
     return render(request, '3adminhome.html')
 

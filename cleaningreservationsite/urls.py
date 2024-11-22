@@ -7,4 +7,5 @@ urlpatterns = [
     path("", include("accounts.urls")),  # accountsアプリのurls
     path("reservation/", include("reservation.urls")),  # reservationのurls
     path("contactus/", include("contactus.urls")),  # contactusのurls
+    path("adminaccounts/", include("adminaccounts.urls"))
 ]
