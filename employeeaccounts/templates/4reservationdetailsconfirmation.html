@@ -5,74 +5,28 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container my-4">
-        <h1 class="mb-4">清掃依頼詳細確認</h1>
-        
-        <!-- スケジュールデータを表示するテーブル -->
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col">名前</th>
-                        <th scope="col">清掃場所</th>
-                        <th scope="col">清掃日時</th>
-                        <th scope="col">依頼状態</th>
-                    </tr>
-                </thead>
-                <tbody id="scheduleTableBody">
-                    <!-- JavaScriptでデータをここに挿入 -->
-                </tbody>
-            </table>
+    <div class="container my-5">
+        <h1 class="mb-4 text-center">清掃依頼詳細確認</h1>
+
+        <!-- 追加情報 -->
+        <div class="mt-4">
+            <h5>詳細情報</h5>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>電話番号:</strong> {{ user_reservation.user_phone }}</li>
+                <li class="list-group-item"><strong>メールアドレス:</strong> {{ user_reservation.user_email }}</li>
+                <li class="list-group-item"><strong>住所:</strong> {{ user_reservation.user_address }}</li>
+                <li class="list-group-item"><strong>備考:</strong> {{ user_reservation.user_comments }}</li>
+            </ul>
+        </div>
+
+        <!-- 戻るボタン -->
+        <div class="text-center mt-4">
+            <form action="{% url 'reservation:Reservation_list' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary px-4">
+                    戻る
+                </button>
+            </form>
         </div>
     </div>
-
-    <script>
-        // APIからデータを取得して表示する関数
-        function loadSchedules() {
-            fetch('/api/schedule')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const tableBody = document.getElementById('scheduleTableBody');
-                    tableBody.innerHTML = '';  // テーブルの内容を初期化
-                    data.forEach(item => {
-                        // 通常のデータ行
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${item.name}</td>
-                            <td>${item.location}</td>
-                            <td>${item.date_time}</td>
-                            <td>${item.status}</td>
-                        `;
-                        tableBody.appendChild(row);
-
-                        // 備考欄の行 (もし備考があれば表示)
-                        if (item.notes) {
-                            const notesRow = document.createElement('tr');
-                            notesRow.className = 'notes-row table-info';
-                            notesRow.innerHTML = `
-                                <td colspan="4"><strong>備考:</strong> ${item.notes}</td>
-                            `;
-                            tableBody.appendChild(notesRow);
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                    const tableBody = document.getElementById('scheduleTableBody');
-                    tableBody.innerHTML = `
-                        <tr>
-                            <td colspan="4" class="text-center text-danger">データの読み込み中にエラーが発生しました。</td>
-                        </tr>
-                    `;
-                });
-        }
-
-        // ページロード時にスケジュールを読み込む
-        window.onload = loadSchedules;
-    </script>
 {% endblock %}

@@ -19,7 +19,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <!-- 予約詳細へのリンク -->
                     <a href="{% url 'reservation:Reservation_detail' user_reservation.user_reservation_id %}" class="text-decoration-none text-dark">
-                        <strong>清掃場所:</strong> {{ user_reservation.user_cleaning_location }}　
+                        <strong>清掃場所:</strong> {{ user_reservation.user_cleaning_location }}
                         <strong>清掃日時:</strong> {{ user_reservation.user_cleaning_date }}
                     </a>
                 </li>

@@ -22,7 +22,7 @@ def employeescheduleaddition(request):
 
 # スケジュール変更
 def employeeschedulechange(request):
-    return render(request, '4employeeschedulechange')
+    return render(request, '4employeeschedulechange.html')
 
 # スケジュール削除
 def employeescheduledeletion(request):

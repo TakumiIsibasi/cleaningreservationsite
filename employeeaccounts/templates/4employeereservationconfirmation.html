@@ -4,26 +4,22 @@
     清掃依頼確認
 {% endblock %}
 
+{% load static %}
+<!-- Bootstrap CSS link -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 {% block content %}
-    <h1>清掃依頼確認</h1>
+    <h1 class="text-center my-4">清掃依頼確認</h1>
 
     <!-- メール風のカード -->
-    <div class="email-card" onclick="goToDetailPage('employee-details.html')">
-        <p class="email-title">山田 太郎</p>
-        <p class="email-details">清掃場所: 東京都新宿区1-1-1</p>
-        <p class="email-details">清掃日時: 2024-11-01 10:00</p>
+    <div class="card my-4" style="max-width: 600px; margin: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <div class="card-header bg-primary text-white" style="border-radius: 10px 10px 0 0;">
+            <h5 class="card-title mb-0">清掃依頼: 山田 太郎</h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><strong>清掃場所:</strong> 東京都新宿区1-1-1</p>
+            <p class="card-text"><strong>清掃日時:</strong> 2024-11-01 10:00</p>
+        </div>
     </div>
 
-    <div class="email-card" onclick="goToDetailPage('employee-details2.html')">
-        <p class="email-title">佐藤 花子</p>
-        <p class="email-details">清掃場所: 東京都渋谷区2-2-2</p>
-        <p class="email-details">清掃日時: 2024-11-02 14:00</p>
-    </div>
-
-    <script>
-        // クリックした際に詳細ページへ移動する関数
-        function goToDetailPage(url) {
-            window.location.href = url;
-        }
-    </script>
 {% endblock %}
