@@ -5,36 +5,63 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container my-4">
-        <h1 class="mb-4">スケジュール追加</h1>
+<div class="container my-4">
+    <h1 class="mb-4">スケジュール追加</h1>
+
+    <!-- スケジュール追加フォーム -->
+    <form method="post" class="needs-validation" id="scheduleForm" novalidate>
+        {% csrf_token %}
         
-        <!-- スケジュール追加フォーム -->
-        <form id="scheduleForm" class="needs-validation" novalidate>
-            <input type="hidden" id="user_id" value="1">
+        <!-- ユーザーID（隠しフィールド） -->
+        <input type="hidden" name="user_id" value="{{ user.id }}">
 
-            <div class="mb-3">
-                <label for="date" class="form-label">日付を選択</label>
-                <input type="date" id="date" class="form-control" required>
-                <div class="invalid-feedback">日付を選択してください。</div>
-            </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">日付を選択</label>
+            <input type="date" id="date" name="date" class="form-control" required>
+            <div class="invalid-feedback">日付を選択してください。</div>
+        </div>
 
-            <div class="mb-3">
-                <label for="start_time" class="form-label">開始時間を入力</label>
-                <input type="time" id="start_time" class="form-control" required>
-                <div class="invalid-feedback">開始時間を入力してください。</div>
-            </div>
+        <div class="mb-3">
+            <label for="start_time" class="form-label">開始時間を入力</label>
+            <input type="time" id="start_time" name="start_time" class="form-control" required>
+            <div class="invalid-feedback">開始時間を入力してください。</div>
+        </div>
 
-            <div class="mb-3">
-                <label for="end_time" class="form-label">終了時間を入力</label>
-                <input type="time" id="end_time" class="form-control" required>
-                <div class="invalid-feedback">終了時間を入力してください。</div>
-            </div>
+        <div class="mb-3">
+            <label for="end_time" class="form-label">終了時間を入力</label>
+            <input type="time" id="end_time" name="end_time" class="form-control" required>
+            <div class="invalid-feedback">終了時間を入力してください。</div>
+        </div>
 
-            <button type="submit" class="btn btn-primary">スケジュール追加</button>
-        </form>
+        <div class="mb-3">
+            <label for="task" class="form-label">タスクを入力</label>
+            <input type="text" id="task" name="task" class="form-control" required>
+            <div class="invalid-feedback">タスク内容を入力してください。</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">スケジュール追加</button>
+    </form>
+
+    <!-- 戻るボタン -->
+    <div class="mt-4">
+        <a href="{% url 'employeeaccounts:employeescheduleconfirmation' %}" class="btn btn-secondary">戻る</a>
     </div>
+</div>
 
-    <div class="mb-4">
-        <a href="{% url 'employeeaccounts:employeescheduleconfirmation' %}" class="btn btn-primary me-2">戻る</a>
-    </div>
+<script>
+    // クライアントサイドのバリデーション処理
+    (function () {
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
 {% endblock %}

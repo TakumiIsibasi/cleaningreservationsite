@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import EmployeeScheduleForm
 from .models import EmployeeSchedule
- 
+
 # 従業員ホーム
 def employeehome(request):
     return render(request, '4employeehome.html')
@@ -20,8 +22,19 @@ def reservationdetailsconfirmation(request):
     return render(request, '4reservationdetailsconfirmation.html')
  
 # スケジュール追加
+@login_required
 def employeescheduleaddition(request):
-    return render(request, '4employeescheduleaddition.html')
+    if request.method == 'POST':
+        form = EmployeeScheduleForm(request.POST)
+        if form.is_valid():
+            schedule = form.save(commit=False)
+            schedule.employee = request.user  # 現在のユーザーを従業員として設定
+            schedule.save()
+            return redirect('employeeaccounts:employeescheduleconfirmation')  # 確認ページへリダイレクト
+    else:
+        form = EmployeeScheduleForm()
+
+    return render(request, '4employeescheduleaddition.html', {'form': form})
  
 # スケジュール変更
 def employeeschedulechange(request):
