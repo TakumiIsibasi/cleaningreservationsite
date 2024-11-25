@@ -12,22 +12,31 @@
         {% csrf_token %}
         
         <div class="mb-3">
-            {{ form.name.label_tag }} 
+            <label for="{{ form.name.id_for_label }}">
+                {{ form.name.label }} 
+            </label>
             {{ form.name|add_class:"form-control" }}
         </div>
         
         <div class="mb-3">
-            {{ form.phone.label_tag }} 
+            <label for="{{ form.phone.id_for_label }}">
+                {{ form.phone.label }} 
+                <small class="text-muted">（10桁以上12桁以内、数字のみ、ハイフンなし）</small>
+            </label>
             {{ form.phone|add_class:"form-control" }}
         </div>
         
         <div class="mb-3">
-            {{ form.email.label_tag }} 
+            <label for="{{ form.email.id_for_label }}">
+                {{ form.email.label }} 
+            </label>
             {{ form.email|add_class:"form-control" }}
         </div>
         
         <div class="mb-3">
-            {{ form.password.label_tag }} 
+            <label for="{{ form.password.id_for_label }}">
+                {{ form.password.label }} 
+            </label>
             {{ form.password|add_class:"form-control" }}
         </div>
         
