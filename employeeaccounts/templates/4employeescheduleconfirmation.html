@@ -8,74 +8,46 @@
     <div class="container my-4">
         <h1 class="mb-4">従業員スケジュール</h1>
 
-        <!-- ボタンの配置 -->
+        <!-- 操作ボタン -->
         <div class="mb-4">
             <a href="{% url 'employeeaccounts:employeescheduleaddition' %}" class="btn btn-primary me-2">スケジュールを追加</a>
             <a href="{% url 'employeeaccounts:employeeschedulechange' %}" class="btn btn-primary me-2">スケジュールを変更</a>
             <a href="{% url 'employeeaccounts:employeescheduledeletion' %}" class="btn btn-danger me-2">スケジュールを削除</a>
         </div>
-        
+
         <!-- スケジュールテーブル -->
         <div class="table-responsive">
             <table class="table table-bordered schedule-table">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">従業員名</th>
-                        <th scope="col">09:00</th>
-                        <th scope="col">10:00</th>
-                        <th scope="col">11:00</th>
-                        <th scope="col">12:00</th>
-                        <th scope="col">13:00</th>
-                        <th scope="col">14:00</th>
-                        <th scope="col">15:00</th>
-                        <th scope="col">16:00</th>
-                        <th scope="col">17:00</th>
+                        <th scope="col">従業員</th>
+                        <th scope="col">日付</th>
+                        <th scope="col">開始時間</th>
+                        <th scope="col">終了時間</th>
+                        <th scope="col">タスク</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td data-employee="佐藤">佐藤</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td data-employee="鈴木">鈴木</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td data-employee="高橋">高橋</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <!-- 他の従業員を追加できます -->
+                    {% for schedule in schedules %}
+                        <tr>
+                            <td>{{ schedule.employee.name }}</td>
+                            <td>{{ schedule.date }}</td>
+                            <td>{{ schedule.start_time }}</td>
+                            <td>{{ schedule.end_time }}</td>
+                            <td>{{ schedule.task }}</td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center">スケジュールがありません。</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <div class="mb-4">
-        <a href="{% url 'employeeaccounts:employeehome' %}" class="btn btn-primary me-2">戻る</a>
+        <!-- 戻るボタン -->
+        <div class="mt-4">
+            <a href="{% url 'employeeaccounts:employeehome' %}" class="btn btn-secondary">戻る</a>
+        </div>
     </div>
 {% endblock %}

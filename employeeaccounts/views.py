@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import EmployeeSchedule
 
 # 従業員ホーム
 def employeehome(request):
@@ -6,7 +7,9 @@ def employeehome(request):
 
 # 従業員スケジュールメニュー
 def employeescheduleconfirmation(request):
-    return render(request, '4employeescheduleconfirmation.html')
+    # 全ての従業員のスケジュールを取得
+    schedules = EmployeeSchedule.objects.all().order_by('date', 'start_time')
+    return render(request, '4employeescheduleconfirmation.html', {'schedules': schedules})
 
 # 清掃依頼確認
 def employeereservationconfirmation(request):
