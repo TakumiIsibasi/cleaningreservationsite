@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
-
+ 
 app_name = "employeeaccounts"
-
+ 
 urlpatterns = [
     path("employeehome", views.employeehome, name="employeehome"),
     path("employeescheduleconfirmation", views.employeescheduleconfirmation, name="employeescheduleconfirmation"),
@@ -12,3 +12,5 @@ urlpatterns = [
     path("employeeschedulechange", views.employeeschedulechange, name="employeeschedulechange"),
     path("employeescheduledeletion", views.employeescheduledeletion, name="employeescheduledeletion"),
 ]
+ 
+ 
