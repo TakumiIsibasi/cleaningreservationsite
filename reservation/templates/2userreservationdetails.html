@@ -1,3 +1,4 @@
+<!-- 2userreservationdetails.html -->
 {% extends 'basea.html' %} <!-- 基本レイアウトテンプレートを継承 -->
 
 <!-- ページタイトル -->
@@ -22,11 +23,9 @@
         </form>
 
         <!-- 予約キャンセルボタン -->
-        <form action="{% url 'reservation:reservationcancellationcompleted' %}" method="post" class="d-inline">
+        <form action="{% url 'reservation:reservationcancellationcompleted' user_reservation.user_reservation_id %}" method="post" class="d-inline">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger mx-2 px-4">
-                キャンセル
-            </button>
+            <button type="submit" class="btn btn-danger mx-2 px-4">キャンセル</button>
         </form>
     </div>
 
