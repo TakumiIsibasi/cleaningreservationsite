@@ -4,6 +4,11 @@ from django.conf import settings
 from django.core.validators import MaxLengthValidator
  
 class UserReservation(models.Model):
+    STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('canceled', 'Canceled'),
+    ]
+ 
     # 主キーとしてUUIDを使用
     user_reservation_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
  
@@ -33,6 +38,14 @@ class UserReservation(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name="更新日時")
     request_date = models.DateField(auto_now_add=True, verbose_name="予約日")
     approval_date = models.DateField(null=True, blank=True, verbose_name="許可日")
+ 
+    # ステータス
+    status = models.CharField(
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='active',
+        verbose_name="ステータス"
+    )
  
     def __str__(self):
         return f"{self.user_name} - {self.user_cleaning_date}"
