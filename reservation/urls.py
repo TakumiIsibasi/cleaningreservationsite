@@ -1,10 +1,8 @@
 from django.urls import path
 from . import views
- 
-# アプリ名の設定
+
 app_name = "reservation"
- 
-# URLパターンの定義
+
 urlpatterns = [
     path("mainmenu", views.mainmenu, name="mainmenu"),
     path("cleaningappointment", views.cleaningappointment, name="cleaningappointment"),
