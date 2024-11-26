@@ -1,13 +1,23 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>予約キャンセル完了</title>
-</head>
-<body>
-    <h1>予約キャンセルが完了しました</h1>
-    <p>ご予約がキャンセルされました。</p>
-    <p><a href="{% url 'reservation:Reservation_list' %}">予約一覧に戻る</a></p>
-</body>
-</html>
+{% extends 'basea.html' %}  <!-- 基本となるレイアウトテンプレート(basea.html)を継承 -->
+
+{% block title %}
+    予約キャンセル完了
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 mb-5 d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="text-center">
+            <h2 class="mb-4">予約キャンセルが完了しました</h2>
+            <p>ご予約がキャンセルされました。</p>
+            <div class="button-container mt-4">
+                <form action="{% url 'reservation:Reservation_list' %}" method="post" style="display: inline-block; margin: 0 10px;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn" 
+                            style="padding: 10px 20px; background-color: #2196F3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                        予約一覧に戻る
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
