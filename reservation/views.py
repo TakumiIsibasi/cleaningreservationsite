@@ -4,13 +4,8 @@ from .forms import UserForm
 from .models import UserReservation
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
- 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
-from .forms import UserForm
-from .models import UserReservation
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
+from django.utils import timezone
  
 # 利用者ログイン後のホーム画面
 @login_required
@@ -57,9 +52,10 @@ class UserReservationView(LoginRequiredMixin, View):
 # 予約一覧画面
 class UserReservationListView(LoginRequiredMixin, View):
     def get(self, request):
-        Reservation_list = UserReservation.objects.filter(user=request.user)
+        # 'active' ステータスの予約のみ表示する
+        Reservation_list = UserReservation.objects.filter(user=request.user, status='active')
         return render(request, '2userreservationlistscreen.html', {"Reservation_list": Reservation_list})
- 
+
     def post(self, request):
         return self.get(request)
  
@@ -87,6 +83,23 @@ class UserReservationUpdateView(LoginRequiredMixin, View):
             return redirect("reservation:Reservation_detail", user_reservation_id=user_reservation_id)
         return render(request, "2reservationchange.html", {"form": form, "user_reservation_id": user_reservation_id})
            
+# 予約キャンセル完了ビュー
+class ReservationCancellationCompletedView(View):
+    def post(self, request, user_reservation_id):
+        # 予約を取得
+        reservation = UserReservation.objects.get(user_reservation_id=user_reservation_id)
+
+        # 予約日時が当日の場合はキャンセル不可
+        if reservation.user_cleaning_date.date() == timezone.now().date():
+            return HttpResponseForbidden("当日のキャンセルはできません。")
+
+        # ステータスをキャンセルに変更
+        reservation.status = 'canceled'
+        reservation.save()
+
+        return redirect('reservation:reservationcancellationcompleted', user_reservation_id=user_reservation_id)  
+
+         
 # URL設定で利用するビューエイリアス
 cleaningappointment = UserReservationView.as_view()  # 予約画面
 Reservation_list = UserReservationListView.as_view()  # 予約一覧画面
