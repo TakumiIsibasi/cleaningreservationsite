@@ -23,7 +23,9 @@
                             <a class="nav-link">{{ request.user.name }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" >ログアウト</a>
+                            <a class="nav-link" href="{% url 'logout' %}">
+                                <i class="bi bi-box-arrow-right"></i> ログアウト
+                            </a>
                         </li>
                     </ul>
                 </div>
