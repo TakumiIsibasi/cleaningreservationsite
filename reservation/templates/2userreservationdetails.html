@@ -1,45 +1,27 @@
-<!-- 2userreservationdetails.html -->
-{% extends 'basea.html' %} <!-- 基本レイアウトテンプレートを継承 -->
- 
-<!-- ページタイトル -->
+{% extends 'basea.html' %}
+
 {% block title %}
     予約詳細
 {% endblock %}
- 
+
 {% block content %}
-{% load static %} <!-- 静的ファイルの読み込み -->
- 
-<!-- 全体の余白とレイアウトを整える -->
+{% load static %}
+
 <div class="container mt-5 mb-5">
- 
-    <!-- 操作ボタンエリア -->
     <div class="mb-4 text-center">
-        <!-- 予約変更ボタン -->
         <form action="{% url 'reservation:Reservation_update' user_reservation.user_reservation_id %}" method="get" class="d-inline">
             {% csrf_token %}
             <button type="submit" class="btn btn-primary mx-2 px-4">
                 変更
             </button>
         </form>
-
-        <!-- 予約キャンセルボタン -->
-        {% if user_reservation.user_cleaning_date|date:"Y-m-d" > today|date:"Y-m-d" %}
-            <!-- 清掃日時が当日でない場合のみキャンセルボタンを表示 -->
-            <form action="{% url 'reservation:reservationcancellationcompleted' user_reservation.user_reservation_id %}" method="post" class="d-inline">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger mx-2 px-4">キャンセル</button>
-            </form>
-        {% else %}
-            <!-- 清掃日時が当日の場合はキャンセルボタンを非表示 -->
-            <span class="text-muted">当日のキャンセルはできません</span>
-        {% endif %}
+        <form action="{% url 'reservation:reservationcancellationcompleted' user_reservation.user_reservation_id %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger mx-2 px-4">キャンセル</button>
+        </form>       
     </div>
- 
-    <!-- 予約詳細カード -->
     <div class="card shadow-sm p-4">
         <h5 class="card-title mb-4 text-center">予約詳細</h5>
- 
-        <!-- 詳細情報のリスト表示 -->
         <ul class="list-group list-group-flush">
             <li class="list-group-item"><strong>名前:</strong> {{ user_reservation.user_name }}</li>
             <li class="list-group-item"><strong>電話番号:</strong> {{ user_reservation.user_phone }}</li>
@@ -50,8 +32,6 @@
             <li class="list-group-item"><strong>備考欄:</strong> {{ user_reservation.user_comments }}</li>
         </ul>
     </div>
- 
-    <!-- 戻るボタン -->
     <div class="text-center mt-4">
         <form action="{% url 'reservation:Reservation_list' %}" method="post">
             {% csrf_token %}
@@ -61,5 +41,4 @@
         </form>
     </div>
 </div>
- 
 {% endblock %}
