@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .forms import EmployeeScheduleForm
 from .models import EmployeeSchedule
 
@@ -22,7 +23,6 @@ def reservationdetailsconfirmation(request):
     return render(request, '4reservationdetailsconfirmation.html')
  
 # スケジュール追加
-@login_required
 def employeescheduleaddition(request):
     if request.method == 'POST':
         form = EmployeeScheduleForm(request.POST)
@@ -38,7 +38,31 @@ def employeescheduleaddition(request):
  
 # スケジュール変更
 def employeeschedulechange(request):
-    return render(request, '4employeeschedulechange.html')
+    schedules = EmployeeSchedule.objects.all().order_by('date', 'start_time')
+
+    if request.method == 'POST':
+        schedule_id = request.POST.get('schedule_id')
+        schedule = get_object_or_404(EmployeeSchedule, id=schedule_id)
+
+        date = request.POST.get('date')
+        start_time = request.POST.get('start_time')
+        end_time = request.POST.get('end_time')
+        task = request.POST.get('task')
+
+        if date:
+            schedule.date = date
+        if start_time:
+            schedule.start_time = start_time
+        if end_time:
+            schedule.end_time = end_time
+        if task:
+            schedule.task = task
+
+        schedule.save()
+        messages.success(request, "スケジュールが正常に更新されました。")
+        return redirect('employeeaccounts:employeescheduleconfirmation')
+
+    return render(request, '4employeeschedulechange.html', {'schedules': schedules})
  
 # スケジュール削除
 def employeescheduledeletion(request):
