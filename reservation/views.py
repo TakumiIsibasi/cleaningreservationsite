@@ -4,9 +4,7 @@ from .forms import UserForm
 from .models import UserReservation
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseForbidden
-from django.utils import timezone
- 
+
 # 利用者ログイン後のホーム画面
 @login_required
 def mainmenu(request):
@@ -62,13 +60,13 @@ class UserReservationListView(LoginRequiredMixin, View):
 # 予約詳細画面
 class UserReservationDetailView(LoginRequiredMixin, View):
     def get(self, request, user_reservation_id):
-        reservation = get_object_or_404(UserReservation, user_reservation_id=user_reservation_id, user=request.user)
+        reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
         return render(request, "2userreservationdetails.html", {"user_reservation": reservation})
  
 # 予約変更画面
 class UserReservationUpdateView(LoginRequiredMixin, View):
     def get(self, request, user_reservation_id):
-        reservation = get_object_or_404(UserReservation, user_reservation_id=user_reservation_id)
+        reservation = get_object_or_404(UserReservation, pk=user_reservation_id)
         form = UserForm(instance=reservation)
         return render(request, "2reservationchange.html", {
             "form": form,
@@ -76,7 +74,7 @@ class UserReservationUpdateView(LoginRequiredMixin, View):
         })
  
     def post(self, request, user_reservation_id):
-        reservation = get_object_or_404(UserReservation, user_reservation_id=user_reservation_id)
+        reservation = get_object_or_404(UserReservation, pk=user_reservation_id)
         form = UserForm(request.POST, instance=reservation)
         if form.is_valid():
             form.save()
@@ -87,19 +85,15 @@ class UserReservationUpdateView(LoginRequiredMixin, View):
 class ReservationCancellationCompletedView(View):
     def post(self, request, user_reservation_id):
         # 予約を取得
-        reservation = UserReservation.objects.get(user_reservation_id=user_reservation_id)
- 
-        # 予約日時が当日の場合はキャンセル不可
-        if reservation.user_cleaning_date.date() == timezone.now().date():
-            return HttpResponseForbidden("当日のキャンセルはできません。")
- 
-        # ステータスをキャンセルに変更
+        reservation = get_object_or_404(UserReservation, pk=user_reservation_id)
+
+        # 予約日時が当日でもキャンセルできるように変更
+        # キャンセル処理をそのまま実行
         reservation.status = 'canceled'
         reservation.save()
- 
-        return redirect('reservation:reservationcancellationcompleted', user_reservation_id=user_reservation_id)  
- 
-         
+
+        return redirect('reservation:reservationcancellationcompleted', user_reservation_id=user_reservation_id)
+
 # URL設定で利用するビューエイリアス
 cleaningappointment = UserReservationView.as_view()  # 予約画面
 Reservation_list = UserReservationListView.as_view()  # 予約一覧画面

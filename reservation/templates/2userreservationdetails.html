@@ -24,7 +24,6 @@
  
         <!-- 予約キャンセルボタン -->
         {% if user_reservation.user_cleaning_date|date:"Y-m-d" > today|date:"Y-m-d" %}
-            <!-- 清掃日時が当日でない場合のみキャンセルボタンを表示 -->
             <form action="{% url 'reservation:reservationcancellationcompleted' user_reservation.user_reservation_id %}" method="post" class="d-inline">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger mx-2 px-4">キャンセル</button>
