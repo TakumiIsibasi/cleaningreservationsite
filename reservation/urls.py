@@ -5,6 +5,7 @@ from . import views
 app_name = "reservation"
  
 # URLパターンの定義
+# urls.py
 urlpatterns = [
     path("mainmenu", views.mainmenu, name="mainmenu"),
     path("cleaningappointment", views.cleaningappointment, name="cleaningappointment"),

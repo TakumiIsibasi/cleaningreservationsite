@@ -82,16 +82,18 @@ class UserReservationUpdateView(LoginRequiredMixin, View):
         return render(request, "2reservationchange.html", {"form": form, "user_reservation_id": user_reservation_id})
            
 # 予約キャンセル完了ビュー
+# views.py
+
 class ReservationCancellationCompletedView(View):
+    def get(self, request, user_reservation_id):
+        reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
+        return render(request, '2reservationcancellationcompleted.html', {"reservation": reservation})
+
     def post(self, request, user_reservation_id):
-        # 予約を取得
-        reservation = get_object_or_404(UserReservation, pk=user_reservation_id)
-
-        # 予約日時が当日でもキャンセルできるように変更
-        reservation.status = 'canceled'
+        reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
+        reservation.status = "canceled"
         reservation.save()
-
-        return redirect('reservation:reservationcancellationcompleted', user_reservation_id=user_reservation_id)
+        return render(request, '2reservationcancellationcompleted.html', {"reservation": reservation})
 
 
 # URL設定で利用するビューエイリアス
