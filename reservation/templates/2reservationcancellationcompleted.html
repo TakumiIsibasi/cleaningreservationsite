@@ -1,35 +1,24 @@
-<!-- templates/home.html -->
-
-{% extends 'basea.html' %}  <!-- 基本レイアウトテンプレートを継承 -->
-
-<!-- 予約キャンセル完了画面のタイトル -->
- <!-- ページタイトル -->
+<!-- 2reservationcancellationcompleted.html -->
+{% extends 'basea.html' %}  <!-- 基本となるレイアウトテンプレート(basea.html)を継承 -->
+ 
 {% block title %}
-    予約キャンセル完了 
+    予約キャンセル完了
 {% endblock %}
-
+ 
 {% block content %}
-{% load static %} <!-- 静的ファイルの読み込み -->
-
-<!-- コンテンツの中央揃えと余白調整 -->
-<div class="content-wrapper" style="text-align: center; margin-top: 50px; padding: 20px;">
-
-    <!-- 予約キャンセル完了メッセージ -->
-    <div class="message-box" style="margin-bottom: 30px; font-size: 18px; color: #333;">
-        <p style="font-weight: bold;">予約をキャンセルしました。</p> <!-- 強調されたメッセージ -->
+    <div class="container mt-5 mb-5 d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="text-center">
+            <h2 class="mb-4">予約キャンセルが完了しました</h2>
+            <p>ご予約がキャンセルされました。</p>
+            <div class="button-container mt-4">
+                <form action="{% url 'reservation:Reservation_list' %}" method="post" style="display: inline-block; margin: 0 10px;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn"
+                            style="padding: 10px 20px; background-color: #2196F3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                        予約一覧に戻る
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <!-- 予約一覧画面に遷移するボタン -->
-    <div class="button-container">
-        <form action="{% url 'reservation:Reservation_list' %}" method="post" style="display: inline-block;">
-            {% csrf_token %}
-            <button type="submit" class="btn"
-                    style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: 0.3s;">
-                予約一覧を見る
-            </button>
-        </form>
-    </div>
-
-</div>
-
 {% endblock %}

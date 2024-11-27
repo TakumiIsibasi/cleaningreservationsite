@@ -1,16 +1,16 @@
 <!-- templates/home.html -->
-
+ 
 {% extends 'basea.html' %}  <!-- 基本となるレイアウトテンプレート(basea.html)を継承 -->
-
+ 
 <!-- タイトルブロックに「予約」と表示 -->
 {% block title %}
     清掃予約
 {% endblock %}
-
+ 
 {% block content %}
 <div class="container mt-4">
     <h2 class="mb-4">予約フォーム</h2>  <!-- フォームの見出し -->
-
+ 
     <!-- 予約フォーム -->
     <form method="POST" class="mb-4">
         {% csrf_token %}  <!-- CSRFトークンを埋め込んで、セキュリティ対策 -->
@@ -60,7 +60,7 @@
         <!-- 送信ボタン -->
         <button type="submit" class="btn btn-primary">予約</button>  <!-- フォーム送信ボタン -->
     </form>
-
+ 
     <!-- 戻るボタン -->
     <!-- ログイン後ホーム画面ページに遷移するためのボタン -->
     <form action="{% url 'reservation:mainmenu' %}" method="post">
