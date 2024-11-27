@@ -1,21 +1,38 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>管理者ホーム</title>
-</head>
-<body>
+{% extends 'based.html' %}  <!-- 基本レイアウトテンプレート(based.html)を継承 -->
 
-<div>
-    <h1>管理者ホーム</h1>
-    <ul>
-        <li><a href="#settings">設定</a></li>
-        <li><a href="#request-check">依頼確認</a></li>
-        <li><a href="#employees">従業員</a></li>
-        <li><a href="#schedule">スケジュール</a></li>
-    </ul>
-</div>
+{% block title %}
+    管理者ホーム
+{% endblock %}
 
-</body>
-</html>
+{% block content %}
+    <div class="container my-5">
+        <h1 class="text-center mb-4">管理者ホーム</h1>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+                <a href="{% url 'adminaccounts:adminemployeelist' %}" class="btn btn-primary w-100 py-3 shadow-lg rounded">
+                    <i class="bi bi-people-fill me-2"></i> 従業員一覧
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <a href="{% url 'adminaccounts:adminrequestconfirmation' %}" class="btn btn-secondary w-100 py-3 shadow-lg rounded">
+                    <i class="bi bi-clipboard-check me-2"></i> 依頼確認
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <a href="{% url 'adminaccounts:adminemployeeschedulelist' %}" class="btn btn-success w-100 py-3 shadow-lg rounded">
+                    <i class="bi bi-calendar2-week-fill me-2"></i> スケジュール一覧
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <a href="{% url 'adminaccounts:administratorrequestschedulechange' %}" class="btn btn-warning w-100 py-3 shadow-lg rounded">
+                    <i class="bi bi-arrow-repeat me-2"></i>  依頼スケジュール変更
+                </a>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <a href="{% url 'adminaccounts:administratorrequestscheduleconfirmation' %}" class="btn btn-danger w-100 py-3 shadow-lg rounded">
+                    <i class="bi bi-check-circle-fill me-2"></i> スケジュール確認
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

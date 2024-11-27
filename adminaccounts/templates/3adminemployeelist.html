@@ -1,40 +1,59 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>従業員一覧</title>
-</head>
-<body>
-    <h1>従業員一覧</h1>
+{% extends 'based.html' %}
 
-    <!-- 機能ボタン -->
-    <div>
-        <button>追加</button>
-        <button>削除</button>
-        <button>絞り込み</button>
-        <button>検索</button>
-    </div>
+{% block title %}
+    従業員一覧
+{% endblock %}
 
-    <!-- 従業員リスト -->
-    <div>
-        <!-- サンプル従業員カード -->
-        <div>
-            <h5>名前とID: 田中 太郎 (ID: 001)</h5>
-            <p>メールアドレス: tanaka@example.com</p>
-            <p>パスワード: ********</p>
-            <p>ステータス: 在職中</p>
-            <button>変更</button>
+{% block content %}
+    <div class="container my-5">
+        <h1 class="text-center mb-4">従業員一覧</h1>
+
+        <!-- 機能ボタン -->
+        <div class="d-flex justify-content-center gap-3 mb-4">
+            <button class="btn btn-primary">追加</button>
+            <button class="btn btn-danger">削除</button>
+            <button class="btn btn-secondary">絞り込み</button>
+            <button class="btn btn-info text-white">検索</button>
         </div>
 
-        <!-- 他の従業員カード -->
-        <div>
-            <h5>名前とID: 鈴木 次郎 (ID: 002)</h5>
-            <p>メールアドレス: suzuki@example.com</p>
-            <p>パスワード: ********</p>
-            <p>ステータス: 退職</p>
-            <button>変更</button>
+        <!-- 従業員リスト -->
+        <div class="row g-4">
+            <!-- サンプル従業員カード -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">田中 太郎 (ID: 001)</h5>
+                        <p class="card-text">
+                            <strong>メールアドレス:</strong> tanaka@example.com<br>
+                            <strong>パスワード:</strong> ********<br>
+                            <strong>ステータス:</strong> 在職中
+                        </p>
+                        <button class="btn btn-warning w-100">変更</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 他の従業員カード -->
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">鈴木 次郎 (ID: 002)</h5>
+                        <p class="card-text">
+                            <strong>メールアドレス:</strong> suzuki@example.com<br>
+                            <strong>パスワード:</strong> ********<br>
+                            <strong>ステータス:</strong> 退職
+                        </p>
+                        <button class="btn btn-warning w-100">変更</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'adminaccounts:adminhome' %}" class="btn btn-secondary w-auto py-2 px-4 shadow-lg rounded">
+            <i class="bi bi-clipboard-check me-2"></i> 戻る
+        </a>
+    </div>
+    
+{% endblock %}

@@ -1,45 +1,18 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>依頼管理</title>
-    <style>
-        .request-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 10px 0;
-            background-color: #f9f9f9;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .status {
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-weight: bold;
-            color: #fff;
-        }
-        .status.pending {
-            background-color: #f39c12;
-        }
-        .status.in-progress {
-            background-color: #3498db;
-        }
-        .status.completed {
-            background-color: #2ecc71;
-        }
-        .status-select {
-            margin-right: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>依頼管理</h1>
-    
-    <!-- 依頼を表示する領域 -->
-    <div id="requestList"></div>
+{% extends 'based.html' %}
+
+{% block title %}
+    依頼管理
+{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <h1 class="text-center mb-4">依頼管理</h1>
+
+        <!-- 依頼リスト表示 -->
+        <div id="requestList" class="row g-4">
+            <!-- 動的に依頼データが挿入される領域 -->
+        </div>
+    </div>
 
     <script>
         // 仮の依頼データ
@@ -55,34 +28,38 @@
         // 依頼データを画面に表示する関数
         function loadRequests() {
             const requestList = document.getElementById('requestList');
-            requestList.innerHTML = '';
+            requestList.innerHTML = ''; // 既存の内容をクリア
 
             requests.forEach(request => {
                 // ステータスの色を決定
                 let statusClass = '';
-                if (request.status === '未完了') statusClass = 'pending';
-                else if (request.status === '進行中') statusClass = 'in-progress';
-                else if (request.status === '終了') statusClass = 'completed';
+                if (request.status === '未完了') statusClass = 'bg-warning';
+                else if (request.status === '進行中') statusClass = 'bg-primary';
+                else if (request.status === '終了') statusClass = 'bg-success';
 
                 // 依頼のカード
                 const card = document.createElement('div');
-                card.className = 'request-card';
+                card.className = 'col-md-6'; // 横長にして2列表示
                 card.innerHTML = `
-                    <div>
-                        <p><strong>${request.title}</strong></p>
-                        <p>場所: ${request.location}</p>
-                        <p>日時: ${request.date}</p>
-                    </div>
-                    <div>
-                        <span class="status ${statusClass}">${request.status}</span>
-                        <select class="status-select">
-                            <option>未完了</option>
-                            <option>進行中</option>
-                            <option>終了</option>
-                        </select>
-                        <select class="employee-select">
-                            ${employees.map(employee => `<option>${employee}</option>`).join('')}
-                        </select>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">${request.title}</h5>
+                            <p class="card-text"><strong>場所:</strong> ${request.location}</p>
+                            <p class="card-text"><strong>日時:</strong> ${request.date}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge ${statusClass} text-white">${request.status}</span>
+                                <div class="d-flex gap-2">
+                                    <select class="form-select form-select-sm w-50">
+                                        <option>未完了</option>
+                                        <option>進行中</option>
+                                        <option>終了</option>
+                                    </select>
+                                    <select class="form-select form-select-sm w-50">
+                                        ${employees.map(employee => `<option>${employee}</option>`).join('')}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 `;
 
@@ -93,5 +70,10 @@
         // ページロード時に依頼データを読み込む
         window.onload = loadRequests;
     </script>
-</body>
-</html>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'adminaccounts:adminhome' %}" class="btn btn-secondary w-auto py-2 px-4 shadow-lg rounded">
+            <i class="bi bi-clipboard-check me-2"></i> 戻る
+        </a>
+    </div>
+{% endblock %}
