@@ -13,6 +13,11 @@ def mainmenu(request):
 def reservationcompleted(request):
     return render(request, '2reservationcompleted.html')
 
+# 予約変更画面
+# 予約を変更するためのフォームを表示するページ
+def reservationchange(request):
+    return render(request, '2reservationchange.html')
+
 class ReservationCancellationCompletedView(LoginRequiredMixin, View):
     def post(self, request, user_reservation_id):
         reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
@@ -54,7 +59,21 @@ class UserReservationUpdateView(LoginRequiredMixin, View):
             return redirect("reservation:Reservation_detail", user_reservation_id=user_reservation_id)
         return render(request, "2reservationchange.html", {"form": form, "user_reservation_id": user_reservation_id})
 
-cleaningappointment = ReservationCancellationCompletedView.as_view()
+class CleaningAppointmentView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = UserForm()  # 清掃予約フォームを表示
+        return render(request, "2cleaningappointment.html", {"form": form})
+
+    def post(self, request):
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()  # フォームデータを保存
+            return redirect("reservation:reservationcompleted")  # 成功時にリダイレクト
+        return render(request, "2cleaningappointment.html", {"form": form})  # バリデーションエラー時
+
+
+# ビューのバインディング
 Reservation_list = UserReservationListView.as_view()
 Reservation_detail = UserReservationDetailView.as_view()
 Reservation_update = UserReservationUpdateView.as_view()
+cleaningappointment = CleaningAppointmentView.as_view()
