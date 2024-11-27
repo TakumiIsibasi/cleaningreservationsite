@@ -1,40 +1,48 @@
-{% extends 'basec.html' %}  <!-- 基本レイアウトテンプレート(basec.html)を継承 -->
+{% extends 'basec.html' %}
 
 {% block title %}
     スケジュール削除
 {% endblock %}
 
 {% block content %}
-    <div class="container my-4">
-        <h1 class="mb-4">スケジュール削除</h1>
-        
-        <!-- スケジュール削除フォーム -->
-        <form id="scheduleForm" class="needs-validation" novalidate>
-            <input type="hidden" id="user_id" value="1">
+<div class="container my-4">
+    <h1 class="mb-4">スケジュール削除</h1>
 
-            <div class="mb-3">
-                <label for="date" class="form-label">日付を選択</label>
-                <input type="date" id="date" class="form-control" required>
-                <div class="invalid-feedback">日付を選択してください。</div>
-            </div>
-
-            <div class="mb-3">
-                <label for="start_time" class="form-label">開始時間を入力</label>
-                <input type="time" id="start_time" class="form-control" required>
-                <div class="invalid-feedback">開始時間を入力してください。</div>
-            </div>
-
-            <div class="mb-3">
-                <label for="end_time" class="form-label">終了時間を入力</label>
-                <input type="time" id="end_time" class="form-control" required>
-                <div class="invalid-feedback">終了時間を入力してください。</div>
-            </div>
-
-            <button type="submit" class="btn btn-danger">スケジュール削除</button>
-        </form>
+    <div class="table-responsive">
+        <table class="table table-bordered schedule-table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">従業員名</th>
+                    <th scope="col">日付</th>
+                    <th scope="col">開始時間</th>
+                    <th scope="col">終了時間</th>
+                    <th scope="col">タスク</th>
+                    <th scope="col">削除</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for schedule in schedules %}
+                <tr>
+                    <td>{{ schedule.employee.username }}</td>
+                    <td>{{ schedule.date }}</td>
+                    <td>{{ schedule.start_time }}</td>
+                    <td>{{ schedule.end_time }}</td>
+                    <td>{{ schedule.task }}</td>
+                    <td>
+                        <form method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="schedule_id" value="{{ schedule.id }}">
+                            <button type="submit" class="btn btn-danger btn-sm">削除</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-    <div class="mb-4">
-        <a href="{% url 'employeeaccounts:employeescheduleconfirmation' %}" class="btn btn-primary me-2">戻る</a>
+    <div class="mt-4">
+        <a href="{% url 'employeeaccounts:employeescheduleconfirmation' %}" class="btn btn-secondary">戻る</a>
     </div>
+</div>
 {% endblock %}

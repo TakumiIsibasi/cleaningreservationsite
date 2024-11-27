@@ -66,6 +66,17 @@ def employeeschedulechange(request):
  
 # スケジュール削除
 def employeescheduledeletion(request):
-    return render(request, '4employeescheduledeletion.html')
- 
- 
+    # スケジュール一覧を取得
+    schedules = EmployeeSchedule.objects.all().order_by('date', 'start_time')
+
+    if request.method == 'POST':
+        # フォームから削除対象のスケジュールIDを取得
+        schedule_id = request.POST.get('schedule_id')
+        schedule = get_object_or_404(EmployeeSchedule, id=schedule_id)
+
+        # 削除処理
+        schedule.delete()
+        messages.success(request, "スケジュールが正常に削除されました。")
+        return redirect('employeeaccounts:employeescheduledeletion')
+
+    return render(request, '4employeescheduledeletion.html', {'schedules': schedules})
