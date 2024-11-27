@@ -5,36 +5,74 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container my-4">
-        <h1 class="mb-4">スケジュール変更</h1>
+<div class="container my-4">
+    <h1 class="mb-4">スケジュール変更</h1>
+
+    <!-- スケジュール選択 -->
+    <form method="post" class="needs-validation" id="scheduleChangeForm" novalidate>
+        {% csrf_token %}
         
-        <!-- スケジュール変更フォーム -->
-        <form id="scheduleForm" class="needs-validation" novalidate>
-            <input type="hidden" id="user_id" value="1">
+        <div class="mb-3">
+            <label for="schedule" class="form-label">変更するスケジュールを選択</label>
+            <select id="schedule" name="schedule_id" class="form-select" required>
+                <option value="" disabled selected>スケジュールを選択してください</option>
+                {% for schedule in schedules %}
+                    <option value="{{ schedule.id }}">
+                        {{ schedule.date }} - {{ schedule.employee.name }} ({{ schedule.start_time }} - {{ schedule.end_time }})
+                    </option>
+                {% endfor %}
+            </select>
+            <div class="invalid-feedback">変更するスケジュールを選択してください。</div>
+        </div>
 
-            <div class="mb-3">
-                <label for="date" class="form-label">日付を選択</label>
-                <input type="date" id="date" class="form-control" required>
-                <div class="invalid-feedback">日付を選択してください。</div>
-            </div>
+        <!-- 日付の変更 -->
+        <div class="mb-3">
+            <label for="date" class="form-label">日付を変更</label>
+            <input type="date" id="date" name="date" class="form-control">
+        </div>
 
-            <div class="mb-3">
-                <label for="start_time" class="form-label">開始時間を入力</label>
-                <input type="time" id="start_time" class="form-control" required>
-                <div class="invalid-feedback">開始時間を入力してください。</div>
-            </div>
+        <!-- 開始時間の変更 -->
+        <div class="mb-3">
+            <label for="start_time" class="form-label">開始時間を変更</label>
+            <input type="time" id="start_time" name="start_time" class="form-control">
+        </div>
 
-            <div class="mb-3">
-                <label for="end_time" class="form-label">終了時間を入力</label>
-                <input type="time" id="end_time" class="form-control" required>
-                <div class="invalid-feedback">終了時間を入力してください。</div>
-            </div>
+        <!-- 終了時間の変更 -->
+        <div class="mb-3">
+            <label for="end_time" class="form-label">終了時間を変更</label>
+            <input type="time" id="end_time" name="end_time" class="form-control">
+        </div>
 
-            <button type="submit" class="btn btn-primary">スケジュール変更</button>
-        </form>
+        <!-- タスクの変更 -->
+        <div class="mb-3">
+            <label for="task" class="form-label">タスクを変更</label>
+            <input type="text" id="task" name="task" class="form-control">
+        </div>
+
+        <!-- 送信ボタン -->
+        <button type="submit" class="btn btn-primary">変更を保存</button>
+    </form>
+
+    <!-- 戻るボタン -->
+    <div class="mt-4">
+        <a href="{% url 'employeeaccounts:employeescheduleconfirmation' %}" class="btn btn-secondary">戻る</a>
     </div>
+</div>
 
-    <div class="mb-4">
-        <a href="{% url 'employeeaccounts:employeescheduleconfirmation' %}" class="btn btn-primary me-2">戻る</a>
-    </div>
+<script>
+    // クライアントサイドのバリデーション処理
+    (function () {
+        'use strict';
+        var forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
 {% endblock %}
