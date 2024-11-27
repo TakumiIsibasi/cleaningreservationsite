@@ -23,16 +23,11 @@
         </form>
  
         <!-- 予約キャンセルボタン -->
-        {% if user_reservation.user_cleaning_date|date:"Y-m-d" > today|date:"Y-m-d" %}
-            <form action="{% url 'reservation:reservationcancellationcompleted' user_reservation.user_reservation_id %}" method="post" class="d-inline">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger mx-2 px-4">キャンセル</button>
-            </form>
-        {% else %}
-            <!-- 清掃日時が当日の場合はキャンセルボタンを非表示 -->
-            <span class="text-muted">当日のキャンセルはできません</span>
-        {% endif %}
-    </div>
+        <form action="{% url 'reservation:reservationcancellationcompleted' user_reservation.user_reservation_id %}" method="post" class="d-inline">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger mx-2 px-4">キャンセル</button>
+        </form>
+    </div>    
  
     <!-- 予約詳細カード -->
     <div class="card shadow-sm p-4">

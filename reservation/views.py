@@ -88,11 +88,11 @@ class ReservationCancellationCompletedView(View):
         reservation = get_object_or_404(UserReservation, pk=user_reservation_id)
 
         # 予約日時が当日でもキャンセルできるように変更
-        # キャンセル処理をそのまま実行
         reservation.status = 'canceled'
         reservation.save()
 
         return redirect('reservation:reservationcancellationcompleted', user_reservation_id=user_reservation_id)
+
 
 # URL設定で利用するビューエイリアス
 cleaningappointment = UserReservationView.as_view()  # 予約画面
