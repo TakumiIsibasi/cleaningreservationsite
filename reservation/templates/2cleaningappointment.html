@@ -47,9 +47,10 @@
        
         <!-- 清掃日時入力欄 -->
         <div class="mb-3">
-            {{ form.user_cleaning_date.label_tag }}  <!-- ラベルを表示 -->
-            <input type="datetime-local" name="user_cleaning_date" class="form-control" required>  <!-- クリーニング日時入力 -->
+            {{ form.user_cleaning_date.label_tag }}
+            {{ form.user_cleaning_date }}
         </div>
+        
        
         <!-- 備考欄 -->
         <div class="mb-3">
