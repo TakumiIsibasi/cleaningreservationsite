@@ -25,7 +25,13 @@ class UserForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # 現在日から3日後を計算
-        min_date = (datetime.now() + timedelta(days=3)).strftime("%Y-%m-%dT%H:%M")
-        # user_cleaning_date フィールドに min 属性を追加
-        self.fields['user_cleaning_date'].widget.attrs['min'] = min_date
+        # 初期化時には特に制限を加えません
+        self.fields['user_cleaning_date'].widget.attrs['min'] = self.get_default_min_date()
+
+    def get_default_min_date(self):
+        # デフォルトでは現在の日付 + 3日を設定（変更が必要ならここで設定）
+        return (datetime.now() + timedelta(days=3)).strftime("%Y-%m-%dT%H:%M")
+
+    def set_min_date(self, reserved_date):
+        # 予約日以降を選べるように設定
+        self.fields['user_cleaning_date'].widget.attrs['min'] = reserved_date.strftime("%Y-%m-%dT%H:%M")

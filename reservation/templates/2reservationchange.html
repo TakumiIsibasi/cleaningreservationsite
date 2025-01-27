@@ -46,8 +46,8 @@
        
         <!-- 清掃日時フィールド -->
         <div class="mb-3">
-            {{ form.user_cleaning_date.label_tag }}  <!-- 清掃日時フィールドのラベル -->
-            <input type="datetime-local" name="user_cleaning_date" value="{{ form.user_cleaning_date.value|date:'Y-m-d\\TH:i' }}" class="form-control" required>
+            {{ form.user_cleaning_date.label_tag }}
+            {{ form.user_cleaning_date }}
         </div>
        
         <!-- コメントフィールド -->
