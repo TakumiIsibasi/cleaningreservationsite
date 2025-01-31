@@ -64,6 +64,7 @@ class UserReservationDetailView(LoginRequiredMixin, View):
         return render(request, "2userreservationdetails.html", {"user_reservation": reservation})
  
 # 予約変更画面
+# 予約変更画面
 class UserReservationUpdateView(LoginRequiredMixin, View):
     def get(self, request, user_reservation_id):
         reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
@@ -76,6 +77,19 @@ class UserReservationUpdateView(LoginRequiredMixin, View):
             "form": form,
             "user_reservation_id": user_reservation_id
         })
+
+    def post(self, request, user_reservation_id):
+        reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
+        form = UserForm(request.POST, instance=reservation)
+
+        if form.is_valid():
+            form.save()
+            return redirect("reservation:Reservation_detail", user_reservation_id=user_reservation_id)
+        else:
+            return render(request, "2reservationchange.html", {
+                "form": form,
+                "user_reservation_id": user_reservation_id
+            })
 
 
  
