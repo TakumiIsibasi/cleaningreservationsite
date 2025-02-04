@@ -1,0 +1,38 @@
+{% extends 'based.html' %}
+
+{% block title %}
+    従業員情報変更
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">従業員情報変更</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">名前</label>
+                    {{ form.name }}
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">メールアドレス</label>
+                    {{ form.email }}
+                </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">電話番号</label>
+                    {{ form.phone }}
+                </div>
+                <div class="mb-3 form-check">
+                    {{ form.is_active }} 
+                    <label for="is_active" class="form-check-label">在職中</label>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">保存</button>
+            </form>
+            <a href="{% url 'adminaccounts:adminemployeelist' %}" class="btn btn-secondary w-100 mt-3">キャンセル</a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
