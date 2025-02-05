@@ -4,6 +4,8 @@ from .forms import UserForm
 from .models import UserReservation
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from datetime import datetime
  
 # 利用者ログイン後のホーム画面
 @login_required
@@ -64,34 +66,41 @@ class UserReservationDetailView(LoginRequiredMixin, View):
         return render(request, "2userreservationdetails.html", {"user_reservation": reservation})
  
 # 予約変更画面
-# 予約変更画面
 class UserReservationUpdateView(LoginRequiredMixin, View):
     def get(self, request, user_reservation_id):
         reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
         form = UserForm(instance=reservation)
-        
+ 
         # 予約日の変更時に予約日以降しか選べないように設定
         form.set_min_date(reservation.user_cleaning_date)
-        
+ 
         return render(request, "2reservationchange.html", {
             "form": form,
             "user_reservation_id": user_reservation_id
         })
-
+ 
     def post(self, request, user_reservation_id):
         reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
+       
+        # 予約日の当日は変更不可
+        today = datetime.now().date()
+        if reservation.user_cleaning_date.date() == today:
+            messages.error(request, "当日の予約は変更できません。")
+            return redirect("reservation:Reservation_update", user_reservation_id=user_reservation_id)
+ 
         form = UserForm(request.POST, instance=reservation)
-
         if form.is_valid():
             form.save()
+            messages.success(request, "予約を変更しました。")
             return redirect("reservation:Reservation_detail", user_reservation_id=user_reservation_id)
         else:
+            messages.error(request, "入力内容に誤りがあります。")
             return render(request, "2reservationchange.html", {
                 "form": form,
                 "user_reservation_id": user_reservation_id
             })
-
-
+ 
+ 
  
            
 # 予約キャンセル完了ビュー
