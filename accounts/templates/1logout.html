@@ -8,12 +8,12 @@
 
 {% block content %}
 {% load static %}
-<div style="text-align: center;">
-    <p>ログアウトが完了しました。メインメニューに戻ります。</p>
+<div class="container d-flex flex-column justify-content-center align-items-center" style="height: 100vh;">
+    <p class="mb-3 text-center">ログアウトが完了しました。メインメニューに戻ります。</p>
     <!-- ログイン前ホーム画面に遷移するボタン -->
     <form action="{% url 'index' %}" method="post">
         {% csrf_token %}
-        <button type="submit">トップページへ</button>
+        <button type="submit" class="btn btn-secondary">トップページへ</button>
     </form>
 </div>
 {% endblock %}
