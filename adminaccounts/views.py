@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from accounts.models import User
 from employeeaccounts.models import EmployeeSchedule
 from .forms import EmployeeUpdateForm
+from reservation.models import UserReservation
 
 # 管理者ホーム画面
 def adminhome(request):
@@ -30,7 +31,11 @@ def employee_update(request, employee_id):
 
 # 依頼管理画面
 def adminrequestconfirmation(request):
-    return render(request, '3adminrequestconfirmation.html')
+    reservations = UserReservation.objects.all().order_by('-created_at')  # 作成日時順に表示
+    context = {
+        'reservations': reservations,
+    }
+    return render(request, '3adminrequestconfirmation.html', context)
 
 # 従業員スケジュール一覧画面
 def adminemployeeschedulelist(request):
