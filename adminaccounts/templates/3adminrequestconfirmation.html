@@ -37,4 +37,9 @@
     <p class="text-center">現在依頼はありません。</p>
     {% endif %}
 </div>
+<div class="text-center mt-4">
+    <a href="{% url 'adminaccounts:adminhome' %}" class="btn btn-secondary w-auto py-2 px-4 shadow-lg rounded">
+        <i class="bi bi-clipboard-check me-2"></i> 戻る
+    </a>
+</div>
 {% endblock %}
