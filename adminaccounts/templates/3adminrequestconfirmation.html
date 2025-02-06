@@ -6,15 +6,15 @@
 
 {% block content %}
 <div class="container my-5">
-    <h1 class="text-center mb-4">依頼一覧</h1>
+    <h1 class="text-left mb-4">依頼一覧</h1>
 
     {% if reservations %}
     <div class="row g-4">
         {% for reservation in reservations %}
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">{{ reservation.user_name }}</h5>
+            <div class="card border-0 shadow-lg rounded-3">
+                <div class="card-body p-4">
+                    <h5 class="card-title fw-bold text-primary">{{ reservation.user_name }}</h5>
                     <p class="card-text">
                         <strong>電話番号:</strong> {{ reservation.user_phone }}<br>
                         <strong>メールアドレス:</strong> {{ reservation.user_email }}<br>
@@ -23,9 +23,9 @@
                         <strong>清掃日:</strong> {{ reservation.user_cleaning_date|date:"Y/m/d H:i" }}<br>
                         <strong>ステータス:</strong> 
                         {% if reservation.status == 'active' %}
-                            <span class="text-success">有効</span>
+                            <span class="badge bg-success">有効</span>
                         {% else %}
-                            <span class="text-danger">キャンセル</span>
+                            <span class="badge bg-danger">キャンセル</span>
                         {% endif %}
                     </p>
                 </div>
@@ -34,12 +34,13 @@
         {% endfor %}
     </div>
     {% else %}
-    <p class="text-center">現在依頼はありません。</p>
+    <p class="text-center text-muted">現在依頼はありません。</p>
     {% endif %}
 </div>
 <div class="text-center mt-4">
-    <a href="{% url 'adminaccounts:adminhome' %}" class="btn btn-secondary w-auto py-2 px-4 shadow-lg rounded">
-        <i class="bi bi-clipboard-check me-2"></i> 戻る
+    <a href="{% url 'adminaccounts:adminhome' %}" class="btn btn-secondary py-2 px-4 shadow-lg rounded-pill">
+        <i class="bi bi-arrow-left-circle me-2"></i> 戻る
     </a>
 </div>
+
 {% endblock %}
