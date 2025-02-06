@@ -39,7 +39,11 @@ def adminrequestconfirmation(request):
 
 # 従業員スケジュール一覧画面
 def adminemployeeschedulelist(request):
-    return render(request, '3adminemployeeschedulelist.html')
+    schedules = EmployeeSchedule.objects.all().order_by('date', 'start_time')
+    context = {
+        'schedules': schedules,
+    }
+    return render(request, '3adminemployeeschedulelist.html', context)
 
 # 依頼スケジュール画面
 def administratorrequestschedulechange(request):

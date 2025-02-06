@@ -8,70 +8,26 @@
 <div class="container my-5">
     <h1 class="text-center mb-4">従業員スケジュール一覧</h1>
 
-    <!-- 機能ボタン -->
-    <div class="d-flex justify-content-center gap-3 mb-4">
-        <button class="btn btn-primary" type="button">追加</button>
-        <button class="btn btn-danger" type="button">削除</button>
-        <button class="btn btn-secondary" type="button">絞り込み</button>
-        <button class="btn btn-info text-white" type="button">検索</button>
-        <button class="btn btn-warning" type="button">変更</button>
+    {% if schedules %}
+    <div class="row g-4">
+        {% for schedule in schedules %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ schedule.employee.name }}</h5>
+                    <p class="card-text">
+                        <strong>勤務日:</strong> {{ schedule.date }}<br>
+                        <strong>開始時間:</strong> {{ schedule.start_time|time:"H:i" }}<br>
+                        <strong>終了時間:</strong> {{ schedule.end_time|time:"H:i" }}<br>
+                        <strong>作業内容:</strong> {{ schedule.task|default:"なし" }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-
-    <!-- スケジュールテーブル -->
-    <div class="table-responsive">
-        <table class="table table-bordered text-center">
-            <thead class="table-light">
-                <tr>
-                    <th>時間帯</th>
-                    <th>1/1</th>
-                    <th>1/2</th>
-                    <th>1/3</th>
-                    <th>1/4</th>
-                    <th>1/5</th>
-                    <th>1/6</th>
-                    <th>1/7</th>
-                    <th>1/8</th>
-                    <th>1/9</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>午前</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>午後</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <!-- 他の従業員のスケジュールを追加可能 -->
-            </tbody>
-        </table>
-    </div>
+    {% else %}
+    <p class="text-center">現在スケジュールはありません。</p>
+    {% endif %}
 </div>
-
-
-<div class="text-center mt-4">
-    <a href="{% url 'adminaccounts:adminhome' %}" class="btn btn-secondary w-auto py-2 px-4 shadow-lg rounded">
-        <i class="bi bi-clipboard-check me-2"></i> 戻る
-    </a>
-</div>
-
-
-
 {% endblock %}

@@ -5,7 +5,7 @@ from .models import UserReservation
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-from datetime import datetime
+from django.utils.timezone import now
  
 # 利用者ログイン後のホーム画面
 @login_required
@@ -15,11 +15,19 @@ def mainmenu(request):
 # 予約キャンセル完了画面
 @login_required
 def reservationcancellationcompleted(request, user_reservation_id):
-    # 指定された予約を取得し、ステータスをキャンセルに変更
     reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
+ 
+    # 当日のキャンセルを禁止
+    today = now().date()
+    if reservation.user_cleaning_date.date() == today:
+        messages.error(request, "当日の予約はキャンセルできません。")
+        return redirect("reservation:Reservation_detail", user_reservation_id=user_reservation_id)
+ 
+    # キャンセル処理
     reservation.status = "canceled"
     reservation.save()
-    return render(request, '2reservationcancellationcompleted.html')
+    messages.success(request, "予約をキャンセルしました。")
+    return redirect("reservation:Reservation_detail", user_reservation_id=user_reservation_id)
  
 # 予約完了画面
 @login_required
@@ -52,7 +60,6 @@ class UserReservationView(LoginRequiredMixin, View):
 # 予約一覧画面
 class UserReservationListView(LoginRequiredMixin, View):
     def get(self, request):
-        # 'active' ステータスの予約のみ表示する
         Reservation_list = UserReservation.objects.filter(user=request.user, status='active')
         return render(request, '2userreservationlistscreen.html', {"Reservation_list": Reservation_list})
  
@@ -81,9 +88,9 @@ class UserReservationUpdateView(LoginRequiredMixin, View):
  
     def post(self, request, user_reservation_id):
         reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
-       
+ 
         # 予約日の当日は変更不可
-        today = datetime.now().date()
+        today = now().date()
         if reservation.user_cleaning_date.date() == today:
             messages.error(request, "当日の予約は変更できません。")
             return redirect("reservation:Reservation_update", user_reservation_id=user_reservation_id)
@@ -100,12 +107,7 @@ class UserReservationUpdateView(LoginRequiredMixin, View):
                 "user_reservation_id": user_reservation_id
             })
  
- 
- 
-           
-# 予約キャンセル完了ビュー
-# views.py
- 
+# 予約キャンセルビュー
 class ReservationCancellationCompletedView(View):
     def get(self, request, user_reservation_id):
         reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
@@ -113,13 +115,21 @@ class ReservationCancellationCompletedView(View):
  
     def post(self, request, user_reservation_id):
         reservation = get_object_or_404(UserReservation, pk=user_reservation_id, user=request.user)
+ 
+        # 当日のキャンセルを禁止
+        today = now().date()
+        if reservation.user_cleaning_date.date() == today:
+            messages.error(request, "当日の予約はキャンセルできません。")
+            return redirect("reservation:Reservation_detail", user_reservation_id=user_reservation_id)
+ 
         reservation.status = "canceled"
         reservation.save()
+        messages.success(request, "予約をキャンセルしました。")
         return render(request, '2reservationcancellationcompleted.html', {"reservation": reservation})
  
- 
 # URL設定で利用するビューエイリアス
-cleaningappointment = UserReservationView.as_view()  # 予約画面
-Reservation_list = UserReservationListView.as_view()  # 予約一覧画面
-Reservation_detail = UserReservationDetailView.as_view()  # 予約詳細画面
-Reservation_update = UserReservationUpdateView.as_view()  # 予約変更画面
+cleaningappointment = UserReservationView.as_view()
+Reservation_list = UserReservationListView.as_view()
+Reservation_detail = UserReservationDetailView.as_view()
+Reservation_update = UserReservationUpdateView.as_view()
+ 
