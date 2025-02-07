@@ -13,4 +13,5 @@ urlpatterns = [
     path("employee_update/<uuid:employee_id>/", views.employee_update, name="employee_update"), 
     path("adminrequestconfirmation/", views.adminrequestconfirmation, name='adminrequestconfirmation'),
     path("adminemployeeschedulelist/", views.adminemployeeschedulelist, name='adminemployeeschedulelist'),
+    path('employee/add/', views.add_employee, name='employee_add'),
 ]

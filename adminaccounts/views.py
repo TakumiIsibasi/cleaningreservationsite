@@ -1,13 +1,23 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from accounts.models import User
 from employeeaccounts.models import EmployeeSchedule
-from .forms import EmployeeUpdateForm
+from .forms import EmployeeUpdateForm, EmployeeForm
 from reservation.models import UserReservation
 
 # 管理者ホーム画面
 def adminhome(request):
     return render(request, '3adminhome.html')
 
+#管理者従業員追加画面
+def add_employee(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('adminaccounts:adminemployeelist')  # リダイレクト修正
+    else:
+        form = EmployeeForm()
+    return render(request, '3add_admin_employee.html', {'form': form})
 # 管理者従業員変更画面
 def adminemployeelist(request):
         # スタッフユーザー（従業員）のみを取得
