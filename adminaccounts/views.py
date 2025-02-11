@@ -52,3 +52,7 @@ def administratorrequestschedulechange(request):
 # 管理者従業員一覧画面
 def administratorrequestscheduleconfirmation(request):
     return render(request, '3administratorrequestscheduleconfirmation.html')
+
+# 管理者依頼許可
+def administratorrequestpermissionconfirmation(request):
+    return render(request, '3administratorrequestpermissionconfirmation.html')
