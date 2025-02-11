@@ -7,7 +7,7 @@ class UserReservation(models.Model):
     STATUS_CHOICES = [
         ('active', 'Active'),
         ('canceled', 'Canceled'),
-        ('pending_active', 'pending_active'),  # 許可待ち状態を追加
+        ('pending_active', 'Pending_Active'),  # 許可待ち状態を追加
     ]
  
     # 主キーとしてUUIDを使用
@@ -44,7 +44,7 @@ class UserReservation(models.Model):
     status = models.CharField(
         max_length=15,  # ステータスの最大文字数を少し大きくしておく
         choices=STATUS_CHOICES,
-        default='active',
+        default='pending_active',
         verbose_name="ステータス"
     )
  
