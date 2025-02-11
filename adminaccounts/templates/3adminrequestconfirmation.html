@@ -23,9 +23,11 @@
                         <strong>清掃日:</strong> {{ reservation.user_cleaning_date|date:"Y/m/d H:i" }}<br>
                         <strong>ステータス:</strong> 
                         {% if reservation.status == 'active' %}
-                            <span class="badge bg-success">有効</span>
-                        {% else %}
-                            <span class="badge bg-danger">キャンセル</span>
+                            <span class="badge bg-success">{{ reservation.get_status_display }}</span>
+                        {% elif reservation.status == 'canceled' %}
+                            <span class="badge bg-danger">{{ reservation.get_status_display }}</span>
+                        {% elif reservation.status == 'pending_active' %}
+                            <span class="badge bg-warning">{{ reservation.get_status_display }}</span>
                         {% endif %}
                     </p>
                 </div>

@@ -31,11 +31,12 @@ def employee_update(request, employee_id):
 
 # 依頼管理画面
 def adminrequestconfirmation(request):
-    reservations = UserReservation.objects.all().order_by('-created_at')  # 作成日時順に表示
+    reservations = UserReservation.objects.filter(status='pending_active').order_by('-created_at')  # 'pending_active'ステータスのものだけ表示
     context = {
         'reservations': reservations,
     }
     return render(request, '3adminrequestconfirmation.html', context)
+
 
 # 従業員スケジュール一覧画面
 def adminemployeeschedulelist(request):
@@ -52,3 +53,5 @@ def administratorrequestschedulechange(request):
 # 管理者従業員一覧画面
 def administratorrequestscheduleconfirmation(request):
     return render(request, '3administratorrequestscheduleconfirmation.html')
+
+

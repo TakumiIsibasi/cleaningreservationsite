@@ -5,9 +5,9 @@ from django.core.validators import MaxLengthValidator
 
 class UserReservation(models.Model):
     STATUS_CHOICES = [
-        ('active', 'Active'),
-        ('canceled', 'Canceled'),
-        ('pending_active', 'Pending_Active'),  # 許可待ち状態を追加
+        ('active', '許可'),
+        ('canceled', 'キャンセル'),
+        ('pending_active', '許可待ち'),  # 許可待ち状態を追加
     ]
  
     # 主キーとしてUUIDを使用
