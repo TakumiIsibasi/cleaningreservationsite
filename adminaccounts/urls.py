@@ -12,5 +12,7 @@ urlpatterns = [
     path("administratorrequestscheduleconfirmation", views.administratorrequestscheduleconfirmation, name="administratorrequestscheduleconfirmation"), 
     path("employee_update/<uuid:employee_id>/", views.employee_update, name="employee_update"), 
     path("adminrequestconfirmation/", views.adminrequestconfirmation, name='adminrequestconfirmation'),
-    path("administratorrequestpermissionconfirmation/", views.administratorrequestpermissionconfirmation, name='administratorrequestpermissionconfirmation'),
+    path("administratorrequestpermissionconfirmation/<uuid:reservation_id>/", views.administratorrequestpermissionconfirmation, name="administratorrequestpermissionconfirmation"),
 ]
+
+

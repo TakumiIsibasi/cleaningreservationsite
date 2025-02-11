@@ -1,46 +1,35 @@
 {% extends 'based.html' %}
 
-{% block title %}
-    依頼一覧
-{% endblock %}
+{% block title %}依頼一覧{% endblock %}
 
 {% block content %}
 <div class="container my-5">
     <h1 class="text-left mb-4">依頼一覧</h1>
-
-    {% if reservations %}
-    <div class="row g-4">
-        {% for reservation in reservations %}
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card border-0 shadow-lg rounded-3">
-                <div class="card-body p-4">
-                    <h5 class="card-title fw-bold text-primary">{{ reservation.user_name }}</h5>
-                    <p class="card-text">
-                        <strong>電話番号:</strong> {{ reservation.user_phone }}<br>
-                        <strong>メールアドレス:</strong> {{ reservation.user_email }}<br>
-                        <strong>住所:</strong> {{ reservation.user_address }}<br>
-                        <strong>清掃場所:</strong> {{ reservation.user_cleaning_location }}<br>
-                        <strong>清掃日:</strong> {{ reservation.user_cleaning_date|date:"Y/m/d H:i" }}<br>
-                        <strong>ステータス:</strong> 
-                        {% if reservation.status == 'active' %}
-                            <span class="badge bg-success">有効</span>
-                        {% else %}
-                            <span class="badge bg-danger">キャンセル</span>
-                        {% endif %}
-                    </p>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <p class="text-center text-muted">現在依頼はありません。</p>
-    {% endif %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>名前</th>
+                <th>清掃日</th>
+                <th>詳細</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.user_name }}</td>
+                <td>{{ reservation.user_cleaning_date|date:"Y/m/d H:i" }}</td>
+                <td>
+                    <a href="{% url 'adminaccounts:administratorrequestpermissionconfirmation' reservation.id %}" class="btn btn-primary">
+                        詳細を見る
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="text-center">依頼がありません。</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-<div class="text-center mt-4">
-    <a href="{% url 'adminaccounts:adminhome' %}" class="btn btn-secondary py-2 px-4 shadow-lg rounded-pill">
-        <i class="bi bi-arrow-left-circle me-2"></i> 戻る
-    </a>
-</div>
-
 {% endblock %}

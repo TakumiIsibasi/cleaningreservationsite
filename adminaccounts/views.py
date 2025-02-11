@@ -31,11 +31,11 @@ def employee_update(request, employee_id):
 
 # 依頼管理画面
 def adminrequestconfirmation(request):
-    reservations = UserReservation.objects.all().order_by('-created_at')  # 作成日時順に表示
+    reservations = UserReservation.objects.all().order_by('-user_cleaning_date')  # 清掃日が新しい順
     context = {
         'reservations': reservations,
     }
-    return render(request, '3adminrequestconfirmation.html', context)
+    return render(request, 'adminrequestconfirmation.html', context)
 
 # 従業員スケジュール一覧画面
 def adminemployeeschedulelist(request):
@@ -54,5 +54,9 @@ def administratorrequestscheduleconfirmation(request):
     return render(request, '3administratorrequestscheduleconfirmation.html')
 
 # 管理者依頼許可
-def administratorrequestpermissionconfirmation(request):
-    return render(request, '3administratorrequestpermissionconfirmation.html')
+def administratorrequestpermissionconfirmation(request, reservation_id):
+    reservation = get_object_or_404(UserReservation, id=reservation_id)
+    context = {
+        'reservation': reservation,
+    }
+    return render(request, '3administratorrequestpermissionconfirmation.html', context)
