@@ -132,4 +132,3 @@ cleaningappointment = UserReservationView.as_view()
 Reservation_list = UserReservationListView.as_view()
 Reservation_detail = UserReservationDetailView.as_view()
 Reservation_update = UserReservationUpdateView.as_view()
- 

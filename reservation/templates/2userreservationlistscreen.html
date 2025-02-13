@@ -8,7 +8,7 @@
  
 {% block content %}
     <div class="container mt-5 mb-5">
-        <h2 class="mb-4 text-center">予約一覧</h2>
+        <h2 class="mb-4 text-center">依頼受付済み一覧</h2>
         <div class="card shadow-sm">
             <ul class="list-group list-group-flush">
                 {% for reservation in Reservation_list %}
@@ -20,7 +20,7 @@
                     </li>
                 {% empty %}
                     <li class="list-group-item text-center">
-                        <span class="text-muted">清掃予約は一つもありません。</span>
+                        <span class="text-muted">清掃依頼が受付られたら依頼した依頼が表示されます</span>
                     </li>
                 {% endfor %}
             </ul>
