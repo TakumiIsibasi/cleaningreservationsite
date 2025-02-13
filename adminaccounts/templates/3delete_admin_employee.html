@@ -1,1 +1,20 @@
 {% extends 'based.html' %}
+
+{% block title %}
+    従業員削除確認
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center text-danger">削除確認</h1>
+    <p class="text-center">本当に <strong>{{ employee.name }}</strong> (ID: {{ employee.id }}) を削除しますか？</p>
+
+    <div class="text-center mt-4">
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">削除する</button>
+            <a href="{% url 'adminaccounts:adminemployeelist' %}" class="btn btn-secondary">キャンセル</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -8,12 +8,21 @@
 <div class="container my-5">
     <h1 class="text-center mb-4">従業員一覧</h1>
 
+    <!-- 検索・絞り込み -->
+    <form method="GET" action="{% url 'adminaccounts:adminemployeelist' %}" class="d-flex justify-content-center gap-3 mb-4">
+        <input type="text" name="search" class="form-control w-25" placeholder="名前・メールで検索" value="{{ request.GET.search }}">
+        <select name="status" class="form-select w-25">
+            <option value="">全てのステータス</option>
+            <option value="active" {% if request.GET.status == "active" %}selected{% endif %}>在職中</option>
+            <option value="inactive" {% if request.GET.status == "inactive" %}selected{% endif %}>退職</option>
+        </select>
+        <button type="submit" class="btn btn-info text-white">検索</button>
+        <a href="{% url 'adminaccounts:adminemployeelist' %}" class="btn btn-secondary">リセット</a>
+    </form>
+
     <!-- 機能ボタン -->
-    <div class="d-flex justify-content-center gap-3 mb-4">
+    <div class="text-center mb-4">
         <a href="{% url 'adminaccounts:employee_add' %}" class="btn btn-primary">追加</a>
-        <button class="btn btn-danger">削除</button>
-        <button class="btn btn-secondary">絞り込み</button>
-        <button class="btn btn-info text-white">検索</button>
     </div>
 
     <!-- 従業員リスト -->
@@ -28,13 +37,15 @@
                         <strong>電話番号:</strong> {{ employee.phone }}<br>
                         <strong>ステータス:</strong> 
                         {% if employee.is_active %}
-                            在職中
+                            <span class="text-success">在職中</span>
                         {% else %}
-                            退職
+                            <span class="text-danger">退職</span>
                         {% endif %}
                     </p>
-                    <!-- URL修正済み -->
-                    <a href="{% url 'adminaccounts:employee_update' employee.id %}" class="btn btn-warning w-100">変更</a>
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'adminaccounts:employee_update' employee.id %}" class="btn btn-warning w-50">変更</a>
+                        <a href="{% url 'adminaccounts:employee_delete' employee.id %}" class="btn btn-danger w-50">削除</a>
+                    </div>
                 </div>
             </div>
         </div>

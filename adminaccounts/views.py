@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from accounts.models import User
 from employeeaccounts.models import EmployeeSchedule
-from .forms import EmployeeUpdateForm, EmployeeForm
+from .forms import EmployeeUpdateForm, EmployeeForm 
 from reservation.models import UserReservation
+from uuid import UUID
 
 # 管理者ホーム画面
 def adminhome(request):
@@ -18,6 +19,15 @@ def add_employee(request):
     else:
         form = EmployeeForm()
     return render(request, '3add_admin_employee.html', {'form': form})
+
+#管理者作業員削除画面
+def delete_employee(request, employee_id):
+    employee = get_object_or_404(User, id=employee_id) 
+    if request.method == 'POST':
+        employee.delete()
+        return redirect('adminaccounts:adminemployeelist')  
+    return render(request, '3delete_admin_employee.html', {'employee': employee})
+
 # 管理者従業員変更画面
 def adminemployeelist(request):
         # スタッフユーザー（従業員）のみを取得
