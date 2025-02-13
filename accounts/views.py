@@ -8,7 +8,11 @@ from .models import User
 
 # ログイン前ホーム画面
 def index(request):
-    return render(request, '1index.html')
+    if request.user.is_authenticated:  # ユーザーがログインしているかチェック
+        return redirect('reservation:mainmenu')  # ログイン後のメインメニューにリダイレクト
+    return render(request, '1index.html')  # 未ログインの場合はログイン前ホーム画面
+
+
 
 
 # ログイン画面
