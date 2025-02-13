@@ -1,1 +1,16 @@
 {% extends 'based.html' %}
+
+{% block title %}
+    従業員追加
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>従業員追加フォーム</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">追加する</button>
+    </form>
+</div>
+{% endblock %}
