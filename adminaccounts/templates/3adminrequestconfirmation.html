@@ -1,13 +1,13 @@
 {% extends 'based.html' %}
-
+ 
 {% block title %}
     依頼一覧
 {% endblock %}
-
+ 
 {% block content %}
 <div class="container my-5">
     <h1 class="text-left mb-4">依頼一覧</h1>
-
+ 
     {% if reservations %}
     <div class="row g-4">
         {% for reservation in reservations %}
@@ -21,11 +21,13 @@
                         <strong>住所:</strong> {{ reservation.user_address }}<br>
                         <strong>清掃場所:</strong> {{ reservation.user_cleaning_location }}<br>
                         <strong>清掃日:</strong> {{ reservation.user_cleaning_date|date:"Y/m/d H:i" }}<br>
-                        <strong>ステータス:</strong> 
+                        <strong>ステータス:</strong>
                         {% if reservation.status == 'active' %}
-                            <span class="badge bg-success">有効</span>
-                        {% else %}
-                            <span class="badge bg-danger">キャンセル</span>
+                            <span class="badge bg-success">{{ reservation.get_status_display }}</span>
+                        {% elif reservation.status == 'canceled' %}
+                            <span class="badge bg-danger">{{ reservation.get_status_display }}</span>
+                        {% elif reservation.status == 'pending_active' %}
+                            <span class="badge bg-warning">{{ reservation.get_status_display }}</span>
                         {% endif %}
                     </p>
                 </div>
@@ -42,5 +44,5 @@
         <i class="bi bi-arrow-left-circle me-2"></i> 戻る
     </a>
 </div>
-
+ 
 {% endblock %}
