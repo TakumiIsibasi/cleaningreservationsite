@@ -2,11 +2,12 @@ from django.db import models
 import uuid
 from django.conf import settings
 from django.core.validators import MaxLengthValidator
- 
+
 class UserReservation(models.Model):
     STATUS_CHOICES = [
-        ('active', 'Active'),
-        ('canceled', 'Canceled'),
+        ('active', '許可'),
+        ('canceled', 'キャンセル'),
+        ('pending_active', '許可待ち'),  # 許可待ち状態を追加
     ]
  
     # 主キーとしてUUIDを使用
@@ -41,11 +42,12 @@ class UserReservation(models.Model):
  
     # ステータス
     status = models.CharField(
-        max_length=10,
+        max_length=15,  # ステータスの最大文字数を少し大きくしておく
         choices=STATUS_CHOICES,
-        default='active',
+        default='pending_active',
         verbose_name="ステータス"
     )
  
     def __str__(self):
         return f"{self.user_name} - {self.user_cleaning_date}"
+
