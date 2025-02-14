@@ -13,4 +13,6 @@ urlpatterns = [
     path("employee/update/<uuid:employee_id>/", views.employee_update, name="employee_update"), 
     path("employee/add/", views.add_employee, name="employee_add"),
     path("employee/delete/<uuid:employee_id>/", views.delete_employee, name="employee_delete"), 
+    path("reservation/update/<uuid:reservation_id>/", views.update_reservation_status, name="update_reservation_status"),
+
 ]

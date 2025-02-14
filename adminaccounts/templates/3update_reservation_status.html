@@ -1,0 +1,16 @@
+{% extends 'baseb.html' %}
+
+{% block content %}
+<h2>依頼のステータス変更</h2>
+
+<p>依頼者: {{ reservation.user_name }}</p>
+<p>清掃予定日時: {{ reservation.user_cleaning_date }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">更新</button>
+    <a href="{% url 'adminaccounts:adminrequestconfirmation' %}" class="btn btn-secondary">キャンセル</a>
+</form>
+
+{% endblock %}

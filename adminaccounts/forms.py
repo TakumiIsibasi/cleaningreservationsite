@@ -2,6 +2,7 @@
 from django import forms
 from django.contrib.auth import get_user_model  # カスタムユーザーモデルをインポート
 from accounts.models import User
+from reservation.models import UserReservation
 
 #従業員変更
 class EmployeeUpdateForm(forms.ModelForm):
@@ -31,4 +32,12 @@ class EmployeeForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
             'role': forms.Select(attrs={'class': 'form-select'}),
             'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
+
+class ReservationStatusUpdateForm(forms.ModelForm):
+    class Meta:
+        model = UserReservation
+        fields = ["status"]
+        widgets = {
+            "status": forms.Select(attrs={"class": "form-control"})
         }

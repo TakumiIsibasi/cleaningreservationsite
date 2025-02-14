@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from accounts.models import User
 from employeeaccounts.models import EmployeeSchedule
-from .forms import EmployeeUpdateForm, EmployeeForm 
+from .forms import EmployeeUpdateForm, EmployeeForm, ReservationStatusUpdateForm
 from reservation.models import UserReservation
+from django.contrib import messages
 
 # 管理者ホーム画面
 def adminhome(request):
@@ -55,6 +56,21 @@ def adminrequestconfirmation(request):
         'reservations': reservations,
     }
     return render(request, '3adminrequestconfirmation.html', context)
+
+# 依頼招待変更画面
+def update_reservation_status(request, reservation_id):
+    reservation = get_object_or_404(UserReservation, user_reservation_id=reservation_id)
+
+    if request.method == "POST":
+        form = ReservationStatusUpdateForm(request.POST, instance=reservation)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "ステータスが更新されました。")
+            return redirect("adminaccounts:adminrequestconfirmation")  # 依頼一覧画面へリダイレクト
+    else:
+        form = ReservationStatusUpdateForm(instance=reservation)
+
+    return render(request, "3update_reservation_status.html", {"form": form, "reservation": reservation})
 
 # 従業員スケジュール一覧画面
 def adminemployeeschedulelist(request):
