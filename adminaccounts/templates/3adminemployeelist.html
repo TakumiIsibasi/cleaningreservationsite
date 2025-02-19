@@ -9,21 +9,22 @@
     <h1 class="text-center mb-4">従業員一覧</h1>
 
     <!-- 検索・絞り込み -->
-    <form method="GET" action="{% url 'adminaccounts:adminemployeelist' %}" class="d-flex justify-content-center gap-3 mb-4">
-        <input type="text" name="search" class="form-control w-25" placeholder="名前・メールで検索" value="{{ request.GET.search }}">
-        <select name="status" class="form-select w-25">
-            <option value="">全てのステータス</option>
-            <option value="active" {% if request.GET.status == "active" %}selected{% endif %}>在職中</option>
-            <option value="inactive" {% if request.GET.status == "inactive" %}selected{% endif %}>退職</option>
-        </select>
-        <button type="submit" class="btn btn-info text-white">検索</button>
-        <a href="{% url 'adminaccounts:adminemployeelist' %}" class="btn btn-secondary">リセット</a>
-    </form>
+<form method="GET" action="{% url 'adminaccounts:adminemployeelist' %}" class="d-flex justify-content-center gap-3 mb-4">
+    <input type="text" name="search" class="form-control w-25" placeholder="名前・メールで検索" aria-label="検索" value="{{ request.GET.search }}">
+    <select name="status" class="form-select w-25" aria-label="ステータス選択">
+        <option value="">全てのステータス</option>
+        <option value="active" {% if request.GET.status == "active" %}selected{% endif %}>在職中</option>
+        <option value="inactive" {% if request.GET.status == "inactive" %}selected{% endif %}>退職</option>
+    </select>
+    <button type="submit" class="btn btn-primary">🔍 検索</button>
+    <a href="{% url 'adminaccounts:adminemployeelist' %}" class="btn btn-outline-secondary">リセット</a>
+</form>
 
-    <!-- 機能ボタン -->
-    <div class="text-center mb-4">
-        <a href="{% url 'adminaccounts:employee_add' %}" class="btn btn-primary">追加</a>
-    </div>
+<!-- 機能ボタン -->
+<div class="text-center mb-4">
+    <a href="{% url 'adminaccounts:employee_add' %}" class="btn btn-success">＋ 従業員を追加</a>
+</div>
+
 
     <!-- 従業員リスト -->
     <div class="row g-4">

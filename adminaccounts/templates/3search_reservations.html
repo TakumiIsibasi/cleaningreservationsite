@@ -1,0 +1,53 @@
+{% extends 'based.html' %}
+
+{% block title %}依頼検索{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">依頼検索</h2>
+
+    <!-- 検索フォーム -->
+    <form method="get" action="{% url 'adminaccounts:reservation_search' %}" class="mb-4 d-flex">
+        <input type="text" name="q" class="form-control me-2" placeholder="名前で検索" value="{{ query|default:'' }}">
+        <button type="submit" class="btn btn-primary me-3">検索</button>
+
+        <!-- 並び順を指定するドロップダウン -->
+        <select name="order" class="form-select w-auto">
+            <option value="user_cleaning_date" {% if current_order == "user_cleaning_date" %}selected{% endif %}>清掃日（昇順）</option>
+            <option value="-user_cleaning_date" {% if current_order == "-user_cleaning_date" %}selected{% endif %}>清掃日（降順）</option>
+            <option value="user_name" {% if current_order == "user_name" %}selected{% endif %}>名前（昇順）</option>
+            <option value="-user_name" {% if current_order == "-user_name" %}selected{% endif %}>名前（降順）</option>
+        </select>
+
+        <button type="submit" class="btn btn-secondary ms-2">並び替え</button>
+    </form>
+
+    <!-- 検索結果の表示 -->
+    {% if reservations %}
+    <div class="row g-4">
+        {% for reservation in reservations %}
+        <div class="col-md-6">
+            <div class="card border-0 shadow-lg rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ reservation.user_name }}</h5>
+                    <p class="card-text">
+                        <strong>清掃日:</strong> {{ reservation.user_cleaning_date|date:"Y/m/d H:i" }}<br>
+                        <strong>ステータス:</strong> {{ reservation.get_status_display }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center text-muted">検索結果が見つかりませんでした。</p>
+    {% endif %}
+
+    <!-- 戻るボタン -->
+    <div class="text-center mt-4">
+        <a href="{% url 'adminaccounts:adminhome' %}" class="btn btn-secondary py-2 px-4 shadow-lg rounded-pill">
+            <i class="bi bi-arrow-left-circle me-2"></i> 戻る
+        </a>
+    </div>
+</div>
+{% endblock %}
