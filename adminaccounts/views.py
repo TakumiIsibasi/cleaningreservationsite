@@ -28,14 +28,34 @@ def delete_employee(request, employee_id):
         return redirect('adminaccounts:adminemployeelist')  
     return render(request, '3delete_admin_employee.html', {'employee': employee})
 
-# 管理者従業員変更画面
+# 管理者従業員一覧
 def adminemployeelist(request):
-        # スタッフユーザー（従業員）のみを取得
-    employees = User.objects.filter(role='staff').order_by('name')
+    # 検索クエリパラメータを取得
+    search_query = request.GET.get('search', '')  # 名前で検索
+    status_filter = request.GET.get('status', '')  # ステータスでフィルタリング
+
+    # 基本の従業員一覧を取得（role='staff'のユーザー）
+    employees = User.objects.filter(role='staff')
+
+    # 名前での検索（部分一致）
+    if search_query:
+        employees = employees.filter(name__icontains=search_query)
+
+    # ステータスでのフィルタリング（在職中・退職）
+    if status_filter:
+        if status_filter == 'active':
+            employees = employees.filter(is_active=True)
+        elif status_filter == 'inactive':
+            employees = employees.filter(is_active=False)
+
+    employees = employees.order_by('name')  # 名前で並び替え
 
     context = {
         'employees': employees,
+        'search_query': search_query,
+        'status_filter': status_filter,
     }
+
     return render(request, '3adminemployeelist.html', context)
 
 def employee_update(request, employee_id):
