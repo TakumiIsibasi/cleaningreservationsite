@@ -25,14 +25,17 @@ class EmployeeUpdateForm(forms.ModelForm):
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['name', 'email', 'phone', 'role', 'is_active']
+        fields = ['name', 'email', 'phone', 'is_active']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
-            'role': forms.Select(attrs={'class': 'form-select'}),
             'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(EmployeeForm, self).__init__(*args, **kwargs)
+        self.instance.role = 'staff'  # role を staff に固定
 
 class ReservationStatusUpdateForm(forms.ModelForm):
     class Meta:
